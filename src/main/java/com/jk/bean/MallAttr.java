@@ -18,5 +18,8 @@ public class MallAttr {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date chjshj;
 
+    String shxzh;
+
+
 
 }

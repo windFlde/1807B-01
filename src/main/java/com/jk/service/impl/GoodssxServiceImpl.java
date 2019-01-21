@@ -20,11 +20,41 @@ public class GoodssxServiceImpl implements GoodssxService {
 
 
     @Override
-    public SendPage getGoodsSx(ReceivePage r, MallAttr m) {
+    public SendPage getGoodsSx(MallAttr m,ReceivePage r) {
+
         List<MallAttr> count = goodssxMapper.getGoodsSx(m);
+        if(r!=null){
+            System.out.println(r.getPage());
+            System.out.println(r.getRows());
+        }
+
         PageHelper.startPage(r.getPage(),r.getRows());
         List<MallAttr> list = goodssxMapper.getGoodsSx(m);
+        for (MallAttr mallAttr : list) {
+            String mm="";
+            List<MallValue>   mv=goodssxMapper.getMallValues(mallAttr.getId());
+            for (MallValue value : mv) {
+                mm+=value.getShxzh()+value.getShxzh_mch()+"    ";
+            }
+            mallAttr.setShxzh(mm);
+        }
         SendPage ss = new SendPage(count.size(), list);
         return ss;
     }
+
+//    @Override
+//    public List<MallAttr> getShuValue(MallAttr m) {
+//        List<MallAttr> list = goodssxMapper.getGoodsSx(m);
+//        System.out.println(list);
+//        for (MallAttr mallAttr : list) {
+//            String mm="";
+//            List<MallValue>   mv=goodssxMapper.getMallValues(mallAttr.getId());
+//                for (MallValue value : mv) {
+//                        mm+=value.getShxzh()+value.getShxzh_mch()+"    ";
+//                }
+//            mallAttr.setShxzh(mm);
+//        }
+//        return list;
+//    }
+
 }
