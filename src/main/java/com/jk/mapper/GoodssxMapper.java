@@ -10,5 +10,10 @@ public interface GoodssxMapper {
 
     List<MallAttr> getGoodsSx(MallAttr m);
 
+
     List<MallValue> getMallValues(Integer id);
+
+
+    void batchadd(List<MallValue> value);
+
 }

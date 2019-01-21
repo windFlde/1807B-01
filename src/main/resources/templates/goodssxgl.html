@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+
+        var i=0;
+
+        function addLine(){
+
+            var content = "";
+            content+="<tr>";
+            content+="<td>属性值<input name='value["+i+"].shxzh'></td>";
+            content+="<td>单位<input name='value["+i+"].shxzh_mch'></td>";
+            content+="</tr>";
+
+            i++;
+            $("table").append(content);
+
+        }
+
+        function del(){
+
+            $("table tr:not(:first):last").remove();
+        }
+
+
+    </script>
+</head>
+<body>
+    <button onclick="addLine()">添加值</button>
+    <button onclick="del()">删除一行</button>
+    <form action="/goodssx/batchadd">
+        <table border="2px">
+            <tr>
+                <td>属性名: <input type="text" name="shxm_mch"> </td>
+                <td><input type="text" > </td>
+
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table border="2px">
+            <tr>
+                <td>属性名: <input type="text" name="shxm_mch"> </td>
+                <td><input type="text" > </td>
+
+            </tr>
+        </table>
+        <input type="submit">
+    </form>
+
+
+
+
+</body>
+</html>
