@@ -1,9 +1,12 @@
 package com.jk.service;
 
 import com.jk.bean.Goods;
+import com.jk.bean.MallAttr;
+import com.jk.bean.ReceivePage;
+import com.jk.bean.SendPage;
 
 public interface GoodsService {
 
 
-    Object getGoodsQuery(int page, int rows, Goods model);
+    SendPage getQueryGoods(ReceivePage r, MallAttr m);
 }

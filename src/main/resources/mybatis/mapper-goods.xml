@@ -3,23 +3,12 @@
 <mapper namespace="com.jk.mapper.GoodsMapepr">
 
 
+    <select id="getQueryGoods" resultType="com.jk.bean.Goods">
 
-    <select id="getqueryPage" resultType="com.jk.bean.Goods">
-        select rer.* from(
-        select re.*,rownum rn from (
-        select Id,shp_mch,shp_tp,flbh1,flbh2,pp_id,chjshj,shp_msh
-        from t_mall_product
-        )re where rownum &lt;= #{end}
-
-        ) rer where rer.rn>#{st}
-    </select>
-
-
-
-    <select id="getqueryTotal" resultType="long">
-        select count(*) from t_mall_product
+        SELECT * FROM t_mall_product limit 1,5
 
     </select>
+
 
 
 </mapper>

@@ -1,16 +1,15 @@
 package com.jk.mapper;
 
 import com.jk.bean.Goods;
+import com.jk.bean.MallAttr;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 public interface GoodsMapepr {
 
 
-    long getqueryTotal(Goods model);
 
-    List<Goods> getqueryPage(int start, int end, Goods model);
-
-
-
+    List<MallAttr> getQueryGoods(MallAttr m);
 }
