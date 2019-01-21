@@ -5,7 +5,6 @@ import com.jk.bean.MallAttr;
 import com.jk.bean.ReceivePage;
 import com.jk.bean.SendPage;
 import com.jk.service.GoodsService;
-import com.jk.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
