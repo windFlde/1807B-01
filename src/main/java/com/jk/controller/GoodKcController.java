@@ -16,6 +16,6 @@ public class GoodKcController {
     @ResponseBody
     @RequestMapping("getSx")
     public String  getSx (String id){
-
+        return null;
     }
 }
