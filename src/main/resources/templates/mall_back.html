@@ -28,6 +28,7 @@
                             valueField: 'id',
                             textField: 'ppmch',
                             onSelect: function (rec) {
+                                //属性
                                 $.ajax({
                                     url:"/kc/getSx",
                                     data:$("form").serialize(),
@@ -35,7 +36,7 @@
                                         content = "";
                                         $.each(result,function(index,obj){
 
-                                            content+="<input type='checkbox' value='"+obj.id+"'>"+obj.shxm_mch+"   ";
+                                            content+="<input type='checkbox'onclik='loadType()' value='"+obj.id+"'>"+obj.shxm_mch+"   ";
                                             $("#shuxing").html(content);
                                         });
                                     },
@@ -43,6 +44,9 @@
                                         alert("ajax访问失败了,查看控制台");
                                     }
                                 });
+                                //名称
+
+
                             }
 
                         });
@@ -52,6 +56,10 @@
             }
         });
     })
+
+    function loadType(){
+
+    }
 </script>
 <body>
 <form>
@@ -76,6 +84,6 @@
     商品库存数量：<input class="easyui-textbox" name="kc" style="width:300px"><br/>
     商品库存价格：<input class="easyui-textbox" name="jg" style="width:300px">
 </form>
-<botton onclick="onSubmit()">提交</botton>
+<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">提交</a>
 </body>
 </html>
