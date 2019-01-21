@@ -5,8 +5,8 @@ import com.jk.bean.MallAttr;
 import com.jk.bean.ReceivePage;
 import com.jk.bean.SendPage;
 import com.jk.service.GoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.jk.utils.FileUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,13 +38,9 @@ public class GoodsController {
         return viewName;
     }
 
-
     /*
-
-        商品的查询
-    *
+    * 商品的查询
     * */
-
     @ResponseBody
     @RequestMapping("getQueryGoods")
     public SendPage getQueryGoods(ReceivePage r, MallAttr m) {

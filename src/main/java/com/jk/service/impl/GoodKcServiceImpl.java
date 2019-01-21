@@ -52,7 +52,6 @@ public class GoodKcServiceImpl implements GoodKcService {
         goodKcMapper.addSku(mallSku);
     }
 
-
     @Override
     public List<Goods> getGoodName(String id) {
         return goodKcMapper.getGoodName(id);

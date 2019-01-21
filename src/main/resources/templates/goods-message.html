@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>商品信息管理</title>
@@ -10,9 +10,29 @@
     <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
 
 </head>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="none">
     $(function(){
-
+        $('#table').treegrid({
+            url:'/goods/getQueryGoods',
+            striped:true,
+            pagination:true,
+            toolbar: '#p',
+            pagePosition:'both',
+            pageList:[1,2,3,4,5,6,7],
+            pageSize:4,
+            rowStyler: function(index){
+                if (index%2!=0){
+                    return 'background-color:#3399cc;color:#fff;';
+                }},
+            columns:[[ {title:'编号',field:'id',width:180},
+                {field: 'shp_mch',title: '商品名字',align: 'center',valign: 'middle'},
+                {field: 'shp_tp',title: '商品图片',align: 'center',valign: 'middle'},
+                {field: 'flbh1',title: '分类编号1',align: 'center',valign: 'middle'},
+                {field: 'flbh2',title: '分类编号2',align: 'center',valign: 'middle'},
+                {field: 'pp_id',title: '品牌id',align: 'center',valign: 'middle'},
+                {field: 'chjshj',title: '创建时间',align: 'center',valign: 'middle'},
+                {field: 'shp_msh',title: '商品描述',align: 'center',valign: 'middle'}, ]]
+        });
     })
 </script>
 <body>
