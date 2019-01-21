@@ -57,9 +57,9 @@ public class GoodsController {
         return "";
     }
 
-    @ResponseBody
-    @RequestMapping("uploadGoods")
-    public String uploadGoods(HttpServletRequest request, MultipartFile img){
-        return FileUtil.upload(img, request);
-    }
+//    @ResponseBody
+//    @RequestMapping("uploadGoods")
+//    public String uploadGoods(HttpServletRequest request, MultipartFile img){
+//        return FileUtil.upload(img, request);
+//    }
 }
