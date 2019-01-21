@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="/js/easyui1.5/themes/icon.css">
+    <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+</head>
+<script type="text/javascript">
+    $(function () {
+        $('#class1').combobox({
+            url:'/json/class_1.js',
+            valueField:'id',
+            method:'get',
+            textField:'flmch1',
+            onSelect:function(rec){
+                $('#class2').combobox({
+                    url: '/json/class_2_'+rec.id+'.js',
+                    method:'get',
+                    valueField: 'id',
+                    textField: 'flmch2',
+                    onSelect: function (rec) {
+                        $('#class3').combobox({
+                            url: '/json/tm_class_1_'+rec.flbh1+'.js',
+                            method:'get',
+                            valueField: 'id',
+                            textField: 'ppmch'
+                        });
+
+                    }
+                });
+            }
+        });
+    })
+</script>
+<body>
+<form>
+    商品sku管理：<br/>
+    <input id="class1"value="请选择">
+    <input id="class2" name="id" value="请选择">
+    <input id="class3" value="请选择">
+    <input id="class4" value="请选择">
+    <hr/>
+    属性列表页：<br/>
+
+    <hr/>
+    <div>
+
+    </div>
+    <hr/>
+    商品库存名称：<input class="easyui-textbox" name="sku_mch" style="width:300px"><br/>
+    商品库存数量：<input class="easyui-textbox" name="kc" style="width:300px"><br/>
+    商品库存价格：<input class="easyui-textbox" name="jg" style="width:300px">
+</form>
+<botton onclick="onSubmit()">提交</botton>
+</body>
+</html>
