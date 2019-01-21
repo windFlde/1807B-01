@@ -10,6 +10,8 @@
 </head>
 <script type="text/javascript">
     $(function () {
+        initDategrid(); //初始化数据表格控件
+
         $('#class1').combobox({
             url:'/json/class_1.js',
             valueField:'id',
@@ -57,18 +59,18 @@
             }
         });
     })
-    function getName(){
+    function getName() {
         $.ajax({
-            url:"/kc/getGoodName",
-            data:$("form").serialize(),
-            success:function(result){
+            url: "/kc/getGoodName",
+            data: $("form").serialize(),
+            success: function (result) {
                 content = "";
-                $.each(result,function(index,obj){
-                    content+="<option value='"+obj.pp_id+"'>"+obj.shp_mch+"</option>";
+                $.each(result, function (index, obj) {
+                    content += "<option value='" + obj.pp_id + "'>" + obj.shp_mch + "</option>";
                     $("#class4").html(content);
                 });
             },
-            error:function(){
+            error: function () {
                 alert("ajax访问失败了,查看控制台");
             }
         });

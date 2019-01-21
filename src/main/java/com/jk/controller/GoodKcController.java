@@ -1,14 +1,16 @@
 package com.jk.controller;
 
-import com.jk.bean.Goods;
-import com.jk.bean.MallAttr;
-import com.jk.bean.MallSku;
-import com.jk.bean.MallValue;
+
+
+
+import com.jk.bean.*;
+
 import com.jk.service.GoodKcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.List;
 
@@ -33,6 +35,18 @@ public class GoodKcController {
         return goodKcService.getValue(id);
     }
 
+    //查询
+    @ResponseBody
+    @RequestMapping("getkucun")
+    public SendPage getkucun(MallSku t, ReceivePage receivePage) {
+        SendPage  sp = goodKcService.getkucun(t, receivePage);
+        return sp;
+    }
+
+
+
+
+
     @ResponseBody
     @RequestMapping("addSku")
     public String addSku(MallSku mallSku){
@@ -45,4 +59,5 @@ public class GoodKcController {
     public List<Goods> getGoodName(String ppid) {
         return goodKcService.getGoodName(ppid);
     }
+
 }
