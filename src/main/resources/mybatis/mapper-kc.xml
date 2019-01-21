@@ -19,7 +19,7 @@
    </select>
     
     <insert id="addSku">
-        insert into t_mall_sku(shp_id,kc,jg,sku_mch,chjshj) value(#{shp_id},#{kc},#{jg},#{sku_mch},new Date())
+        insert into t_mall_sku(shp_id,kc,jg,sku_mch,chjshj) value(#{shp_id},#{kc},#{jg},#{sku_mch},curdate())
     </insert>
 
     <select id="getGoodName" resultType="goods">
