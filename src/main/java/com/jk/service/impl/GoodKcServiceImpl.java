@@ -1,6 +1,7 @@
 package com.jk.service.impl;
 
 import com.jk.bean.MallAttr;
+import com.jk.bean.MallValue;
 import com.jk.mapper.GoodKcMapper;
 import com.jk.service.GoodKcService;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,10 @@ public class GoodKcServiceImpl implements GoodKcService {
     @Override
     public List<MallAttr> getSx(String id) {
         return goodKcMapper.getSx(id);
+    }
+
+    @Override
+    public List<MallValue> getValue(Integer id) {
+        return goodKcMapper.getValue(id);
     }
 }
