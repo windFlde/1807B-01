@@ -11,9 +11,15 @@ public interface GoodKcMapper {
 
     List<MallAttr> getSx(String id);
 
+
+    List<MallValue> getValue(Integer id);
+
+    List<MallSku> getkucuns(MallSku t);
+
     List<MallValue> getValue(String id);
 
     void addSku(MallSku mallSku);
 
     List<Goods> getGoodName(String id);
+
 }
