@@ -10,4 +10,8 @@
     <select id="getValue" resultType="mallValue">
         select id,shxzh from t_mall_value where shxm_id=#{id}
     </select>
+    
+    <insert id="addSku">
+        insert into t_mall_sku(shp_id,kc,jg,sku_mch,chjshj) value(#{shp_id},#{kc},#{jg},#{sku_mch},new Date())
+    </insert>
 </mapper>

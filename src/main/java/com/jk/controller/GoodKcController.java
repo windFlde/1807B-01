@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 import com.jk.bean.MallAttr;
+import com.jk.bean.MallSku;
 import com.jk.bean.MallValue;
 import com.jk.service.GoodKcService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,15 @@ public class GoodKcController {
 
     @ResponseBody
     @RequestMapping("getValue")
-    public List<MallValue> getValue(Integer id){
+    public List<MallValue> getValue(String id){
 
         return goodKcService.getValue(id);
+    }
+
+    @ResponseBody
+    @RequestMapping("addSku")
+    public String addSku(MallSku mallSku){
+        goodKcService.addSku(mallSku);
+        return "1";
     }
 }
