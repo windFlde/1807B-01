@@ -24,8 +24,6 @@ chjshj(创建时间)   Date
 shp_msh(商品描述)  String(1000)
     *
     * */
-
-
     Integer id;
     String shp_mch;
     String shp_tp;

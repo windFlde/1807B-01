@@ -22,4 +22,5 @@ public interface GoodKcMapper {
 
     List<Goods> getGoodName(String id);
 
+    void addSkuAndattrAndvalue(MallSku mallSku);
 }
