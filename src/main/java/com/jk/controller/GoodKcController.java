@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import com.jk.bean.Goods;
 import com.jk.bean.MallAttr;
 import com.jk.bean.MallSku;
 import com.jk.bean.MallValue;
@@ -39,5 +40,11 @@ public class GoodKcController {
         return "1";
 
 
+    }
+
+    @ResponseBody
+    @RequestMapping("getGoodName")
+    public List<Goods> getGoodName(String id) {
+        return goodKcService.getGoodName(id);
     }
 }

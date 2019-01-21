@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品添加</title>
+
+    <link rel="stylesheet" href="/js/easyui1.5/themes/icon.css">
+    <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+
+</head>
+<script type="text/javascript">
+    $(function(){
+        preFile();
+        $('#class-1').combobox({
+            url:'/json/class_1.js',
+            valueField:'id',
+            textField:'flmch1',
+            method:'get',
+            onSelect: function(itme){
+               //console.log(itme);
+                $('#class-2').combobox({
+                    url:'/json/class_2_'+itme.id+'.js',
+                    valueField:'id',
+                    textField:'flmch2',
+                    method:'get',
+                    onSelect: function(row){
+                        //console.log(row);
+                        $('#class-3').combobox({
+                            url:'/json/tm_class_1_'+row.flbh1+'.js',
+                            valueField:'id',
+                            textField:'ppmch',
+                            method:'get',
+                            onSelect: function(asd){
+                                //console.log(asd);
+                             }
+                       });
+                    }
+                });
+            }
+        });
+    })
+
+</script>
+<body>
+    <input id="class-1" name="flbh1" value="请选择">
+    <input id="class-2" name="flbh2" value="请选择">
+    <input id="class-3" name="pp_id" value="请选择">
+   <hr/>
+    商品名称：<input name="shp_mch">
+    <hr/>
+    商品描述：<textarea ></textarea><br>
+    商品图片：<input type="hidden" name="img" ><img id="img" width="50" src="<%=path %>/upload/">
+              <input type="file" id="file"><div id="fileQueue"></div>
+</body>
+</html>

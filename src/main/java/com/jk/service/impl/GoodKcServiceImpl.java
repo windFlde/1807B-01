@@ -1,5 +1,6 @@
 package com.jk.service.impl;
 
+import com.jk.bean.Goods;
 import com.jk.bean.MallAttr;
 import com.jk.bean.MallSku;
 import com.jk.bean.MallValue;
@@ -29,6 +30,12 @@ public class GoodKcServiceImpl implements GoodKcService {
     @Override
     public void addSku(MallSku mallSku) {
         goodKcMapper.addSku(mallSku);
+    }
+
+
+    @Override
+    public List<Goods> getGoodName(String id) {
+        return goodKcMapper.getGoodName(id);
     }
 
 }

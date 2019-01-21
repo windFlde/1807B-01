@@ -1,5 +1,6 @@
 package com.jk.service;
 
+import com.jk.bean.Goods;
 import com.jk.bean.MallAttr;
 import com.jk.bean.MallSku;
 import com.jk.bean.MallValue;
@@ -13,4 +14,6 @@ public interface GoodKcService {
     List<MallValue> getValue(String id);
 
     void addSku(MallSku mallSku);
+
+    List<Goods> getGoodName(String id);
 }
