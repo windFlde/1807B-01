@@ -1,6 +1,11 @@
 package com.jk.controller;
 
 import com.jk.bean.Goods;
+import com.jk.bean.MallAttr;
+import com.jk.bean.ReceivePage;
+import com.jk.bean.SendPage;
+import com.jk.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("goods")
 public class GoodsController {
+
+
+
+    @Autowired
+    GoodsService goodsService;
+
 
     @RequestMapping("toView")
     public String toView(String viewName){
@@ -29,13 +40,12 @@ public class GoodsController {
     *
     * */
 
-    @RequestMapping("getGoodsQuery")
     @ResponseBody
-    public Object getGoodsQuery(int page,int rows,Goods model){
-        Object json=goodsService.getGoodsQuery(page,rows,model);
-        return json;
+    @RequestMapping("getQueryGoods")
+    public SendPage getQueryGoods(ReceivePage r, MallAttr m) {
+        SendPage sp=goodsService.getQueryGoods(r,m);
+        return sp;
     }
-
 
 
 
