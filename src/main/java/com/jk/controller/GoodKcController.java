@@ -42,7 +42,7 @@ public class GoodKcController {
 
     @ResponseBody
     @RequestMapping("getGoodName")
-    public List<Goods> getGoodName(String id) {
-        return goodKcService.getGoodName(id);
+    public List<Goods> getGoodName(String ppid) {
+        return goodKcService.getGoodName(ppid);
     }
 }
