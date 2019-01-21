@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.GoodssxMapper">
+
+
+
+
+
+    <insert id="batchadd">
+        insert into t_mall_value(shxzh,shxzh_mch) values
+        <foreach separator=","  item="value" collection="list">(#{value.shxzh},#{value.shxzh_mch})</foreach>
+    </insert>
+
+
+
+</mapper>

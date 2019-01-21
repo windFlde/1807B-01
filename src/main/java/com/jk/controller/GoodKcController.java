@@ -17,5 +17,6 @@ public class GoodKcController {
     @RequestMapping("getSx")
     public String  getSx (String id){
 
+        return "success";
     }
 }
