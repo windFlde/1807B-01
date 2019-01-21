@@ -1,10 +1,10 @@
 package com.jk.service;
 
-import com.jk.bean.Attr;
+import com.jk.bean.MallAttr;
 
 import java.util.List;
 
 public interface GoodKcService {
 
-    List<Attr> getSx(String id);
+    List<MallAttr> getSx(String id);
 }
