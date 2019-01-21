@@ -50,6 +50,12 @@ public class GoodKcServiceImpl implements GoodKcService {
 
     public void addSku(MallSku mallSku) {
         goodKcMapper.addSku(mallSku);
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        goodKcMapper.addSkuAndattrAndvalue(mallSku);
     }
 
     @Override

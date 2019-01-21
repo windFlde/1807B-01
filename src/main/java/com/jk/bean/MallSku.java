@@ -24,5 +24,7 @@ public class MallSku {
 
     //临时字段
     private String shp_mch;
+    private String shxzh_id;
+    private String shxm_id;
 
 }
