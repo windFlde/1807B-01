@@ -15,16 +15,21 @@
         $("#tt").tree({
             onClick: function(node){
                 //console.log(node);
-                $('#tabs').tabs('add',{
-                    title:node.text,
-                    closable:true,
-                    tools:[{
-                        iconCls:'icon-mini-refresh',
-                        handler:function(){
-                            alert('refresh');
-                        }
-                    }]
-                });
+                var asd = $("#tabs").tabs('exists', node.text);
+                if(asd){
+                    $("#tabs").tabs('select', node.text);
+                }else{
+                    $('#tabs').tabs('add',{
+                        title:node.text,
+                        closable:true,
+                        tools:[{
+                            iconCls:'icon-mini-refresh',
+                            handler:function(){
+                                alert('refresh');
+                            }
+                        }]
+                    });
+                }
             }
         });
     });
