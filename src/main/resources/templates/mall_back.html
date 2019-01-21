@@ -28,7 +28,29 @@
                             url: '/json/tm_class_1_'+rec.flbh1+'.js',
                             method:'get',
                             valueField: 'id',
-                            textField: 'ppmch'
+                            textField: 'ppmch',
+                            onSelect: function (rec) {
+                                //属性
+                                $.ajax({
+                                    url:"/kc/getSx",
+                                    data:$("form").serialize(),
+                                    success:function(result){
+                                        content = "";
+                                        $.each(result,function(index,obj){
+
+                                            content+="<input type='checkbox'onclik='loadType()' value='"+obj.id+"'>"+obj.shxm_mch+"   ";
+                                            $("#shuxing").html(content);
+                                        });
+                                    },
+                                    error:function(){
+                                        alert("ajax访问失败了,查看控制台");
+                                    }
+                                });
+                                //名称
+
+
+                            }
+
                         });
 
                     }
@@ -37,6 +59,7 @@
         });
     })
 
+<<<<<<< HEAD
 
 
     //------------------------------------------------------查询开始
@@ -65,17 +88,26 @@
           });
        }
     //-------------------------------------------------------查询结束
+=======
+    function loadType(){
+
+    }
+>>>>>>> origin/master
 </script>
 <body>
 <form>
     商品sku管理：<br/>
     <input id="class1"value="请选择">
-    <input id="class2" name="id" value="请选择">
+    <input id="class2" name="id" >
     <input id="class3" value="请选择">
-    <input id="class4" value="请选择">
+    <select id="class4">
+
+    </select>
     <hr/>
     属性列表页：<br/>
+    <div id="shuxing">
 
+    </div>
     <hr/>
     <div>
 
@@ -85,6 +117,6 @@
     商品库存数量：<input class="easyui-textbox" name="kc" style="width:300px"><br/>
     商品库存价格：<input class="easyui-textbox" name="jg" style="width:300px">
 </form>
-<botton onclick="onSubmit()">提交</botton>
+<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">提交</a>
 </body>
 </html>

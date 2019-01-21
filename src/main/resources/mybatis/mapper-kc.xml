@@ -12,8 +12,18 @@
     </select>
 
 
+
  <!--   List<MallSku> getkucuns(MallSku t);-->
     <select id="getkucuns" resultType="MallSku">
     SELECT k.*,s.shp_mch shp_mch  FROM t_mall_sku k,t_mall_product s WHERE k.shp_id=s.Id
+   </select>
+    
+    <insert id="addSku">
+        insert into t_mall_sku(shp_id,kc,jg,sku_mch,chjshj) value(#{shp_id},#{kc},#{jg},#{sku_mch},new Date())
+    </insert>
+
+    <select id="getGoodName" resultType="goods">
+        select id,shp_mch from t_mall_product where pp_id=#{id}
+
     </select>
 </mapper>

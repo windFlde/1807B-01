@@ -1,13 +1,20 @@
 package com.jk.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.jk.bean.*;
+
+import com.jk.bean.Goods;
+import com.jk.bean.MallAttr;
+import com.jk.bean.MallSku;
+import com.jk.bean.MallValue;
+
 import com.jk.mapper.GoodKcMapper;
 import com.jk.service.GoodKcService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.awt.print.Book;
+
 import java.util.List;
 
 @Service
@@ -23,10 +30,16 @@ public class GoodKcServiceImpl implements GoodKcService {
 
     @Override
     public List<MallValue> getValue(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<MallValue> getValue(String id) {
         return goodKcMapper.getValue(id);
     }
 
     @Override
+
     public SendPage getkucun(MallSku t, ReceivePage receivePage) {
         List <MallSku> sum=goodKcMapper.getkucuns(t);
         PageHelper.startPage(receivePage.getPage(),receivePage.getRows());
@@ -35,4 +48,16 @@ public class GoodKcServiceImpl implements GoodKcService {
         return sendPage;
 
     }
+
+    public void addSku(MallSku mallSku) {
+        goodKcMapper.addSku(mallSku);
+    }
+
+
+    @Override
+    public List<Goods> getGoodName(String id) {
+        return goodKcMapper.getGoodName(id);
+    }
+
+
 }
