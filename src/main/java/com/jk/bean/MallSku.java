@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 public class MallSku {
 
-    private Integer id;
+    private Integer Id;
     private Integer shp_id;
     private Integer kc;
     private Double jg;

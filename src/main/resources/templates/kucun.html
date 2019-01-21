@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
     <!--引入jquery 一定放在第一行  -->
     <script src="/js/jquery-2.1.1.min.js"></script>
-
-
-    <!--引入uploadify的样式 -->
-    <link rel="stylesheet" href="/js/uploadify/uploadify.css" />
-    <script src="/js/uploadify/jquery.uploadify.min.js"></script>
-
     <!--引入kindedit的样式 -->
     <link rel="stylesheet" href="/js/kindeditor-4.1.10/themes/default/default.css"/>
     <script src="/js/kindeditor-4.1.10/kindeditor-all.js"></script>
@@ -21,9 +15,8 @@
 
     <script type="text/javascript" src="/js/easyui1.5/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
-  
 </head>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="none">
     $(function(){
         initDategrid(); //初始化数据表格控件
     });
@@ -31,7 +24,7 @@
     //------------------------------------------------------查询开始
     function initDategrid(){//初始化datagrid控件
         $('#dg').datagrid({    //调查时重新请求这个地址，把数据发送过去
-            url:'/getkucun',
+            url:'/kc/getkucun',
             striped:true,
             toolbar: '#tb',
             pagination:true,
@@ -42,11 +35,11 @@
             columns:[[
                 {field:'xxx',title:'ID',width:'5%',checkbox:true},
                 {field:'id',title:'ID',width:'5%'},
-                {field:'shp_mch',title:'商品名称',width:80,editor:'text'},
-                {field:'ku',title:'商品库存',width:80,align:'right'} ,
-                {field:'jg',title:'商品价格',width:80,align:'right',editor:'numberbox'} ,
-                {field:'chjshj',title:'创建时间',width:100,align:'right',editor:'validatebox'} ,
-                {field:'sku_mch',title:'商品简介',width:80,editor:'text'},
+                {field:'shp_mch',title:'商品名称',width:150,editor:'text'},
+                {field:'kc',title:'商品库存',width:80,align:'right'} ,
+                {field:'jg',title:'商品价格',width:80,align:'right'} ,
+            /*    {field:'chjshj',title:'创建时间',width:100,align:'right'},*/
+                {field:'sku_mch',title:'商品简介',width:300,editor:'text'},
             ]],
             checkOnSelect:false,//-------如果为true，当用户点击行的时候该复选框就会被选中或取消选中。
                                 // 如果为false，当用户仅在点击该复选框的时候才会呗选中或取消。
@@ -55,7 +48,7 @@
     }
     //-------------------------------------------------------查询结束
 </script>
-<body th:>
+<body>
 <table id="dg" fit=true></table>
 </body>
 </html>
