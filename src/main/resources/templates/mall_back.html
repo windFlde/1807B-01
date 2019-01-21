@@ -53,7 +53,7 @@
                                     success: function (result) {
                                         content = "";
                                         $.each(result, function (index, obj) {
-                                            content += "<option value='" + obj.pp_id + "'>" + obj.shp_mch + "</option>";
+                                            content += "<option value='" + obj.id + "'>" + obj.shp_mch + "</option>";
                                             $("#class4").html(content);
                                         });
                                     },
@@ -70,25 +70,29 @@
             }
         });
     })
+    function addGoods(){
 
 
-
-
-
-    function loadType(){
-
+        $.ajax({
+            url:"/kc/addSku",
+            type:"POST",
+            data:$("form").serialize(),
+            success:function(pageUtil){
+               alert("成功！！！")
+            },
+            error:function(){
+                alert("失败了");
+            }
+        });
     }
-
-
-
 </script>
 <body>
 <form>
     商品sku管理：<br/>
     <input id="class1"value="请选择">
-    <input id="class2" name="id" value="请选择">
+    <input id="class2" name="pid" value="请选择">
     <input id="class3" name="ppid" value="请选择">
-    <select id="class4" >
+    <select name="shp_id" id="class4" >
     <option value="0">请选择</option>
     </select>
     <hr/>
@@ -97,7 +101,7 @@
 
     </div>
     <hr/>
-    <div>
+    <div id="shuxingzhi">
 
     </div>
     <hr/>
@@ -105,6 +109,6 @@
     商品库存数量：<input class="easyui-textbox" name="kc" style="width:300px"><br/>
     商品库存价格：<input class="easyui-textbox" name="jg" style="width:300px">
 </form>
-<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">提交</a>
+<a id="btn" href="javascript:void(0)" onClick="addGoods()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">提交</a>
 </body>
 </html>

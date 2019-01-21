@@ -23,9 +23,9 @@ public class GoodKcController {
 
     @ResponseBody
     @RequestMapping("getSx")
-    public List<MallAttr> getSx (String id){
+    public List<MallAttr> getSx (String pid){
 
-        return goodKcService.getSx(id);
+        return goodKcService.getSx(pid);
     }
 
     @ResponseBody
