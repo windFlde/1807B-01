@@ -37,5 +37,7 @@ public class GoodKcController {
     public String addSku(MallSku mallSku){
         goodKcService.addSku(mallSku);
         return "1";
+
+
     }
 }
