@@ -21,6 +21,12 @@ public class GoodKcController {
     @Autowired
     private GoodKcService goodKcService;
 
+    @RequestMapping("toView")
+    public String toView(String viewName){
+
+        return viewName;
+    }
+
     @ResponseBody
     @RequestMapping("getSx")
     public List<MallAttr> getSx (String id){
