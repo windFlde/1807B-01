@@ -9,4 +9,6 @@ public interface GoodsService {
 
 
     SendPage getQueryGoods(ReceivePage r, MallAttr m);
+
+    void addGoods(Goods goods);
 }

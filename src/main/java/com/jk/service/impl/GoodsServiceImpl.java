@@ -30,4 +30,9 @@ public class GoodsServiceImpl implements GoodsService{
         SendPage ss = new SendPage(count.size(), list);
         return ss;
     }
+
+    @Override
+    public void addGoods(Goods goods) {
+        goodsMapper.addGoods(goods);
+    }
 }

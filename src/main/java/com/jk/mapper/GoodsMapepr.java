@@ -12,4 +12,6 @@ public interface GoodsMapepr {
 
 
     List<MallAttr> getQueryGoods(MallAttr m);
+
+    void addGoods(Goods goods);
 }

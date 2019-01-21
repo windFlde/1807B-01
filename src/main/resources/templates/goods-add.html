@@ -46,16 +46,20 @@
     })
     function baocun(){
         preFile();
-        $('#add').form('submit', {
-            url:'/goods/addGoods',
-            success: function(){
+        $.ajax({
+            url:"/goods/addGoods",
+            type:"POST",
+            data:$("#add").serialize(),
+            success:function(pageUtil){
                 $.messager.show({
                     title:'新增消息',
                     msg:'新增成功！',
                     timeout:3000,
                     showType:'slide'
                 });
-                $("#add").form('clear');
+            },
+            error:function(){
+                alert("失败了");
             }
         });
     }
@@ -94,7 +98,7 @@
                 //给img框赋值进行展示
                 $("#img").prop("src",imgurl);
                 //给隐藏的文本框赋值 传到后台
-                $("[name='img']").val(data);
+                $("[name='shp_tp']").val(data);
             }
 
         });
@@ -102,21 +106,20 @@
 </script>
 <body>
   <form id="add">
-
-    <input id="class-1" name="flbh1" value="请选择">
-    <input id="class-2" name="flbh2" value="请选择">
-    <input id="class-3" name="pp_id" value="请选择">
-   <hr/>
-    商品名称：<input name="shp_mch" class="easyui-textbox" data-options="iconCls:'icon-search'">
-    <hr/>
-      商品描述：<textarea ></textarea>
+        <input id="class-1" name="flbh1" value="请选择">
+        <input id="class-2" name="flbh2" value="请选择">
+        <input id="class-3" name="pp_id" value="请选择">
+       <hr/>
+      商品名称：<input name="shp_mch" class="easyui-textbox" data-options="iconCls:'icon-search'">
+       <hr/>
+      商品描述：<textarea name="shp_msh" ></textarea>
       <br>
-      商品图片：<input type="hidden" name="img" >
+      商品图片：<input type="hidden" name="shp_tp" >
                 <input type="file" id="file">
                 <div id="fileQueue"></div>
                 <img id="img" width="50" >
                 <br/>
-                <input type="button" onclick="baocun()" value="保存">
 </form>
+  <input type="button" onclick="baocun()" value="保存">
 </body>
 </html>

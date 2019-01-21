@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-
+import java.util.Date;
 
 
 /**
@@ -47,10 +47,14 @@ public class GoodsController {
         SendPage sp=goodsService.getQueryGoods(r,m);
         return sp;
     }
-
+/*
+  商品新增
+ */
     @ResponseBody
     @RequestMapping("addGoods")
     public String addGoods(Goods goods){
+        goods.setChjshj(new Date());
+        goodsService.addGoods(goods);
         return "";
     }
 

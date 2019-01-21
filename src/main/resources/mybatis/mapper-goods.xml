@@ -5,9 +5,23 @@
 
     <select id="getQueryGoods" resultType="com.jk.bean.Goods">
 
-        SELECT * FROM t_mall_product limit 1,5
+        SELECT * FROM t_mall_product
 
     </select>
+
+    <!--void addGoods(Goods goods);-->
+    <insert id="addGoods">
+        insert into t_mall_product
+    (id,
+    shp_mch,
+    shp_tp,
+    flbh1,
+    flbh2,
+    pp_id,
+    chjshj,
+    shp_msh
+    )values(#{id},#{shp_mch},#{shp_tp},#{flbh1},#{flbh2},#{pp_id},#{chjshj},#{shp_msh});
+    </insert>
 
 
 
