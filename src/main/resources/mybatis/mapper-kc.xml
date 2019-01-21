@@ -10,4 +10,10 @@
     <select id="getValue" resultType="mallValue">
         select id,shxzh from t_mall_value where shxm_id=#{id}
     </select>
+
+
+ <!--   List<MallSku> getkucuns(MallSku t);-->
+    <select id="getkucuns" resultType="MallSku">
+    SELECT k.*,s.shp_mch shp_mch  FROM t_mall_sku k,t_mall_product s WHERE k.shp_id=s.Id
+    </select>
 </mapper>

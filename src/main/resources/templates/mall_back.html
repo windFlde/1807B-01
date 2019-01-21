@@ -10,6 +10,8 @@
 </head>
 <script type="text/javascript">
     $(function () {
+        initDategrid(); //初始化数据表格控件
+
         $('#class1').combobox({
             url:'/json/class_1.js',
             valueField:'id',
@@ -34,6 +36,35 @@
             }
         });
     })
+
+
+
+    //------------------------------------------------------查询开始
+    function initDategrid(){//初始化datagrid控件
+        $('#dg').datagrid({    //调查时重新请求这个地址，把数据发送过去
+            url:'/getkucun',
+            striped:true,
+            toolbar: '#tb',
+            pagination:true,
+            pagePosition:top,
+            pageList:[1,2,3,4,5,6,8,10],
+            pageSize: 5, //默认显示多少条 这个值一定在pagelist中存在
+            loadMsg:'正在加载,别着急',
+            columns:[[
+                {field:'xxx',title:'ID',width:'5%',checkbox:true},
+                {field:'id',title:'ID',width:'5%'},
+                {field:'shp_mch',title:'商品名称',width:80,editor:'text'},
+                {field:'ku',title:'商品库存',width:80,align:'right'} ,
+                {field:'jg',title:'商品价格',width:80,align:'right',editor:'numberbox'} ,
+                {field:'chjshj',title:'创建时间',width:100,align:'right',editor:'validatebox'} ,
+                {field:'sku_mch',title:'商品简介',width:80,editor:'text'},
+            ]],
+            checkOnSelect:false,//-------如果为true，当用户点击行的时候该复选框就会被选中或取消选中。
+                                // 如果为false，当用户仅在点击该复选框的时候才会呗选中或取消。
+
+          });
+       }
+    //-------------------------------------------------------查询结束
 </script>
 <body>
 <form>
