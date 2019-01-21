@@ -1,4 +1,4 @@
-package com.jk.demo;
+package com.jk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
