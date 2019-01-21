@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
     <script src="/js/jquery-2.1.1.min.js"></script>
     <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="/js/uploadify/uploadify.css" />
+    <script src="/js/uploadify/jquery.uploadify.min.js"></script>
 
 </head>
 <script type="text/javascript">
     $(function(){
-        preFile();
         $('#class-1').combobox({
             url:'/json/class_1.js',
             valueField:'id',
@@ -41,17 +42,76 @@
             }
         });
     })
-
+    function baocun(){
+        preFile();
+        $('#add').form('submit', {
+            url:'/goods/addGoods',
+            success: function(){
+                $.messager.show({
+                    title:'新增消息',
+                    msg:'新增成功！',
+                    timeout:3000,
+                    showType:'slide'
+                });
+                $("#add").form('clear');
+            }
+        });
+    }
+    function preFile(){
+        //上传插件
+        $("#file").uploadify({
+            //插件自带  不可忽略的参数
+            'swf': '/js/uploadify/uploadify.swf',
+            //前台请求后台的url 不可忽略的参数      //*****要修改路经 !!!!!!!!!!!!!!!!!!!!!!!!
+            'uploader': '/goods/uploadGoods',
+            //给div的进度条加背景 不可忽略
+            'queueID': 'fileQueue',
+            //上传文件文件名 !!!!!!!!!!!!!!!!!!与后台接口参数名字需要完全一致!!!!!!!!!!!!!!!!!!!!!!!!
+            'fileObjName' : 'img',
+            //给上传按钮设置文字
+            'buttonText': '上传图片',
+            //设置文件是否自动上传
+            'auto': true,
+            //可以同时选择多个文件 默认为true  不可忽略
+            'multi': false,
+            //上传后队列是否消失
+            'removeCompleted': true,
+            //队列消失时间
+            'removeTimeout' : 1,
+            //上传文件的个数，项目中一共可以上传文件的个数
+            'uploadLimit' : -1,
+            'onFallback':function(){
+                alert("浏览器不支持,请更换其他浏览器,或打开Flash插件");},
+            //上传失败
+            'onUploadError':function(){
+                alert("上传失败");
+            },
+            //成功回调函数 file：文件对象。data后台输出数据
+            'onUploadSuccess':function(file,data,response){
+                var imgurl = "/upload/"+data;
+                //给img框赋值进行展示
+                $("#img").attr("src",imgurl);
+                //给隐藏的文本框赋值 传到后台
+                $("[name='img']").val(data);
+            }
+        });
+    }
 </script>
 <body>
+  <form id="add">
+
     <input id="class-1" name="flbh1" value="请选择">
     <input id="class-2" name="flbh2" value="请选择">
     <input id="class-3" name="pp_id" value="请选择">
    <hr/>
-    商品名称：<input name="shp_mch">
+    商品名称：<input name="shp_mch" class="easyui-textbox" data-options="iconCls:'icon-search'">
     <hr/>
-    商品描述：<textarea ></textarea><br>
-    商品图片：<input type="hidden" name="img" ><img id="img" width="50" src="<%=path %>/upload/">
-              <input type="file" id="file"><div id="fileQueue"></div>
+      商品描述：<textarea ></textarea>
+      <br>
+      商品图片：<input type="hidden" name="img" >
+                <input type="file" id="file"><div id="fileQueue"></div><img id="img" width="50" >
+      <br/>
+              <input type="button" onclick="baocun()" value="保存">
+</form>
 </body>
 </html>

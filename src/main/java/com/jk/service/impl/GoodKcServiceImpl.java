@@ -39,7 +39,6 @@ public class GoodKcServiceImpl implements GoodKcService {
     }
 
     @Override
-
     public SendPage getkucun(MallSku t, ReceivePage receivePage) {
         List <MallSku> sum=goodKcMapper.getkucuns(t);
         PageHelper.startPage(receivePage.getPage(),receivePage.getRows());
