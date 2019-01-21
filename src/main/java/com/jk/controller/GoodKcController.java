@@ -1,6 +1,6 @@
 package com.jk.controller;
 
-import com.jk.bean.Attr;
+import com.jk.bean.MallAttr;
 import com.jk.service.GoodKcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class GoodKcController {
 
     @ResponseBody
     @RequestMapping("getSx")
-    public List<Attr> getSx (String id){
+    public List<MallAttr> getSx (String id){
 
         return goodKcService.getSx(id);
     }
