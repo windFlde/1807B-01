@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class MallSku {
@@ -23,6 +23,10 @@ public class MallSku {
     private Integer sku_xl;
     private String kcdz;
 
-    private ArrayList<MallValue> attrVal;
+    //临时字段
+    private String shp_mch;
+    private String shxzh_id;
+    private String shxm_id;
 
+    private List<MallSkuValue> attrVal;
 }

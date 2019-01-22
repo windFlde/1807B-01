@@ -1,9 +1,6 @@
 package com.jk.service;
 
-import com.jk.bean.MallAttr;
-import com.jk.bean.ReceivePage;
-import com.jk.bean.SendPage;
-import com.jk.bean.ValueBean;
+import com.jk.bean.*;
 
 public interface GoodssxService {
 
@@ -11,5 +8,5 @@ public interface GoodssxService {
 
     void batchadd(ValueBean valueBean);
 
-//    List<MallAttr> getShuValue(MallAttr m);
+    void addGoodssx(QueryParam queryParam);
 }

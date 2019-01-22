@@ -1,9 +1,6 @@
 package com.jk.mapper;
 
-import com.jk.bean.Goods;
-import com.jk.bean.MallAttr;
-import com.jk.bean.MallSku;
-import com.jk.bean.MallValue;
+import com.jk.bean.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
@@ -24,6 +21,5 @@ public interface GoodKcMapper {
 
     List<Goods> getGoodName(String id);
 
-
-    void addSkuAndattrAndvalue(@Param("attrVal") ArrayList<MallValue> attrVal);
+    void addMallSkuAttrValue(MallSkuValue value);
 }

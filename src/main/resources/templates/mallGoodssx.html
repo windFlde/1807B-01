@@ -24,7 +24,6 @@
             pagination:true,
             pageList:[3,4,5,6,7],
             pageSize: 4,
-            flbh2:cc2,
             /* 奇数偶数行不同颜色 start */
             rowStyler: function(index,row){
                 if (index%2==0){
@@ -59,30 +58,18 @@
                 cc1=newValue;
                 console.log("cc1==="+cc1);
                 getSecond(newValue);
-                /*ajax start*/
-                    // $.ajax({
-                    //     url:"/goodssx/getGoodsSx",
-                    //     type:"POST",
-                    //     data:{id:newValue},
-                    //     success:function(a){
-                    //         layer.msg("查询成功!");
-                    //     },
-                    //     error:function(){
-                    //         layer.msg("ajax失败");
-                    //     }
-                    // });
-                /*ajax end*/
 
             }
         });
     }
+
     function getSecond(pid){
         $('#cc2').combobox({
             url:"/json/class_2_"+pid+".js",
             method:'get',
             valueField:'id',//<select> <option value='obj.id' > obj.name</select>    $([],functtion(index,obj){})
             textField:'flmch2',  //<select> <option > xxx  </option> </select>
-            onChange:function(newValue, oldValue){//newValue 就是选中的id
+            onChange:function(newValue, oldValue){//newValue 就是选中的idh
                 console.log(newValue);
                 cc2=newValue;
                 console.log("cc2===="+cc2)
@@ -114,12 +101,10 @@
     }
 </script>
 <body>
-<form id="query_form">
-    <select id="cc1" value="-1" class="easyui-combobox" name="id" style="width:200px;">
-    </select> <br />
-    <select id="cc2" value="-1" class="easyui-combobox" name="flbh2" style="width:200px;">
-    </select>
-</form>
+<select id="cc1" value="-1" class="easyui-combobox" name="id" style="width:200px;">
+</select> <br />
+<select id="cc2" value="-1" class="easyui-combobox" name="flbh2" style="width:200px;">
+</select>
 <table id="dg" height="500" width="100%"></table>
 </body>
 </html>

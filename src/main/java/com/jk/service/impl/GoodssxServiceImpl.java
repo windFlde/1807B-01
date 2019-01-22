@@ -20,16 +20,8 @@ public class GoodssxServiceImpl implements GoodssxService {
     public SendPage getGoodsSx(MallAttr m,ReceivePage r) {
 
         List<MallAttr> count = goodssxMapper.getGoodsSx(m);
-        if(r!=null){
-            System.out.println(r.getPage());
-            System.out.println(r.getRows());
-        }
-
         PageHelper.startPage(r.getPage(),r.getRows());
         List<MallAttr> list = goodssxMapper.getGoodsSx(m);
-
-        System.out.println("list长度为"+list.size());
-
         for (MallAttr mallAttr : list) {
             String mm="";
             List<MallValue>   mv=goodssxMapper.getMallValues(mallAttr.getId());
@@ -47,19 +39,18 @@ public class GoodssxServiceImpl implements GoodssxService {
         goodssxMapper.batchadd(valueBean.getValue());
     }
 
-//    @Override
-//    public List<MallAttr> getShuValue(MallAttr m) {
-//        List<MallAttr> list = goodssxMapper.getGoodsSx(m);
-//        System.out.println(list);
-//        for (MallAttr mallAttr : list) {
-//            String mm="";
-//            List<MallValue>   mv=goodssxMapper.getMallValues(mallAttr.getId());
-//                for (MallValue value : mv) {
-//                        mm+=value.getShxzh()+value.getShxzh_mch()+"    ";
-//                }
-//            mallAttr.setShxzh(mm);
-//        }
-//        return list;
-//    }
+    @Override
+    public void addGoodssx(QueryParam queryParam) {
+        goodssxMapper.addGoodssx(queryParam);
+        List<MallAttr> attr_value = queryParam.getAttr_value();
+        for (MallAttr mallAttr : attr_value) {
+            if(mallAttr.getShxzh()!=null){
+                goodssxMapper.addAttr_value(mallAttr,queryParam.getId());
+            }
+        }
+
+
+    }
+
 
 }
