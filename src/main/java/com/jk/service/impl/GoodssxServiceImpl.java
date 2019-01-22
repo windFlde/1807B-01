@@ -27,6 +27,9 @@ public class GoodssxServiceImpl implements GoodssxService {
 
         PageHelper.startPage(r.getPage(),r.getRows());
         List<MallAttr> list = goodssxMapper.getGoodsSx(m);
+
+        System.out.println("list长度为"+list.size());
+
         for (MallAttr mallAttr : list) {
             String mm="";
             List<MallValue>   mv=goodssxMapper.getMallValues(mallAttr.getId());

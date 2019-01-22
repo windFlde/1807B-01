@@ -4,12 +4,10 @@
 
     <!--List<MallAttr> getGoodsSx(MallAttr m);-->
     <select id="getGoodsSx" resultType="MallAttr">
-        SELECT  *  FROM  t_mall_attr
-            <where>
-                <if test="flbh2!=null and flbh2!=-1">
-                    flbh2 =#{flbh2}
-                </if>
-            </where>
+        SELECT  *  FROM  t_mall_attr where 1=1
+                <if test="flbh2!=null ">
+                 and flbh2 =#{flbh2}
+            </if>
     </select>
 
 
