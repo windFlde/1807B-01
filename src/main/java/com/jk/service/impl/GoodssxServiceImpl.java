@@ -41,14 +41,13 @@ public class GoodssxServiceImpl implements GoodssxService {
 
     @Override
     public void addGoodssx(QueryParam queryParam) {
-        goodssxMapper.addGoodssx(queryParam);
-        List<MallAttr> attr_value = queryParam.getAttr_value();
-        for (MallAttr mallAttr : attr_value) {
-            if(mallAttr.getShxzh()!=null){
-                goodssxMapper.addAttr_value(mallAttr,queryParam.getId());
-            }
-        }
-
+        goodssxMapper.addGoodssx(queryParam.getShxm());
+//        List<MallValue> attr_value = queryParam.getAttr_value();
+//        for (MallValue mallAttr : attr_value) {
+//            if(mallAttr.getShxzh()!=null){
+//                goodssxMapper.addAttr_value(mallAttr,queryParam.getId());
+//            }
+//        }
 
     }
 

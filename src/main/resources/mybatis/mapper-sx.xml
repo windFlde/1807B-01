@@ -21,27 +21,27 @@
 
     </select>
 
-    <insert id="batchadd">
+    <!--<insert id="batchadd">
 
         insert into t_mall_value(shxzh,shxzh_mch) values
         <foreach separator="," item="value" collection="list">(#{value.shxzh},#{value.shxzh_mch}) </foreach>
 
-    </insert>
+    </insert>-->
 
     <!--void addGoodssx(QueryParam queryParam);-->
     <insert id="addGoodssx">
-      insert into t_mall_value(shxm_mch,shfqy,flbh2,chjshj) values(
-           #{shxm},1,#{pid},SYSDATE()
+      insert into t_mall_attr (shxm_mch,shfqy,flbh2) values(
+           #{shxm},'2',3
         )
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+       <!-- <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
-        </selectKey>
+        </selectKey>-->
     </insert>
 
     <!--void addAttr_value(MallAttr mallAttr, Integer id);-->
-    <insert id="addAttr_value">
-        insert into t_mall_value(shxzh,shfqy,shxm_id,shxzh_mch)
-        VALUES (#{attr_value.shxzh},1,#{id},#{attr_value.shxzh_mch})
-    </insert>
+    <!--<insert id="addAttr_value">-->
+    <!--insert into t_mall_value(shxzh,shfqy,shxm_id,shxzh_mch)-->
+    <!--VALUES (#{mallValue.shxzh},1,#{id},#{mallValue.shxzh_mch})-->
+    <!--</insert>-->
 
 </mapper>
