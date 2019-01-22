@@ -30,7 +30,7 @@
                                 content = "";
                                 $.each(result, function (index, obj) {
 
-                                    content += "<input type='checkbox'onclick='getcheckedid(this)'name='attrVal[\" + index + \"].shxm_id' value='" + obj.id + "'>" + obj.shxm_mch + "   ";
+                                    content += "<input type='checkbox'onclick='getcheckedid(this)'name='attrVal["+ index +"].shxm_id' value='" + obj.id + "'>" + obj.shxm_mch + "   ";
                                     $("#shuxing").html(content);
                                 });
                             },
@@ -81,14 +81,14 @@
             var count2 = "";
             count = $(check).val()
             $.ajax({
-                url: '/sku/querythis',
+                url: '/kc/getValue',
                 data: {ids: count},
                 success: function (item) {
                     count2 += "<div id='sxmid_" + check.value + "'>"  //属性名字对应的属性值列表给包裹起来
 
                     $.each(item, function (index, obj) {
 
-                        count2 += "<input type='radio' name='attrVal[" + indexGloal + "].shxzh_id' value=" + obj.id + ">" + obj.shxzh + "-" + obj.shxzhMch;
+                        count2 += "<input type='radio' name='attrVal[" + indexGloal + "].shxzh_id' value=" + obj.id + ">" + obj.shxzh + "-" + obj.shxzh_mch;
 
                     })
 
@@ -138,7 +138,7 @@
 
     </div>
     <hr/>
-    <div id="shuxingzhi">
+    <div id="orders">
 
     </div>
     <hr/>

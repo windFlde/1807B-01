@@ -8,7 +8,7 @@
     </select>
 
     <select id="getValue" resultType="mallValue">
-        select id,shxzh from t_mall_value where shxm_id=#{id}
+        select id,shxzh,shxzh_mch from t_mall_value where shxm_id=#{id}
     </select>
 
 
