@@ -5,15 +5,14 @@ import com.jk.bean.MallAttr;
 import com.jk.bean.ReceivePage;
 import com.jk.bean.SendPage;
 import com.jk.service.GoodsService;
-import com.jk.utils.FileUtil;
+import com.jk.utils.OssUpFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 
 
 /**
@@ -40,27 +39,42 @@ public class GoodsController {
 
     /*
     * 商品的查询
-    * */
+    **/
     @ResponseBody
     @RequestMapping("getQueryGoods")
     public SendPage getQueryGoods(ReceivePage r, MallAttr m) {
         SendPage sp=goodsService.getQueryGoods(r,m);
         return sp;
     }
-/*
-  商品新增
- */
+
+    /**
+     * 新增图片
+     */
+    String filename = "";
+    @ResponseBody
+    @PostMapping("toUploadBlog")
+    public String toUploadBlog(@RequestParam("file") MultipartFile file){
+        Map<String, Object> stringObjectMap = OssUpFileUtil.uploadFile(file);
+        System.out.println(stringObjectMap);
+        String count = "";
+        for (String key : stringObjectMap.keySet()) {
+            Object o = stringObjectMap.get(key);
+            System.out.println("key: " + key + " value: " + o);
+            if(key=="url"){
+                count+=o;
+                filename = count;
+            }
+        }
+        return count;
+    }
+    /*
+       商品新增
+    */
     @ResponseBody
     @RequestMapping("addGoods")
     public String addGoods(Goods goods){
         goods.setChjshj(new Date());
         goodsService.addGoods(goods);
         return "";
-    }
-
-   @ResponseBody
-   @RequestMapping("uploadGoods")
-   public String uploadGoods(HttpServletRequest request, MultipartFile img){
-       return FileUtil.upload(img, request);
     }
 }

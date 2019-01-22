@@ -34,7 +34,12 @@
                 {field:'xxx',title:'复选框',width:50,checkbox:true},
                 {field:'id',title:'id',width:100},
                 {field: 'shp_mch',title: '商品名字',align: 'center'},
-                {field: 'shp_tp',title: '商品图片',align: 'center',},
+                {field: 'shp_tp',title: '商品图片',align: 'center',
+                    formatter: function(value,row,index){
+                        console.info(index)
+                        return "<img src='"+value+"' width='88px'/>";
+                    }
+                },
                 {field: 'flbh1',title: '分类编号1',align: 'center',},
                 {field: 'flbh2',title: '分类编号2',align: 'center',},
                 {field: 'pp_id',title: '品牌id',align: 'center'},
