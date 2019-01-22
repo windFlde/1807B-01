@@ -56,7 +56,7 @@ public class GoodKcServiceImpl implements GoodKcService {
         try {
             Thread.sleep(1000);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("出错了");
         }
         goodKcMapper.addSkuAndattrAndvalue(mallSku);
     }
