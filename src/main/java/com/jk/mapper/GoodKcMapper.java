@@ -24,6 +24,7 @@ public interface GoodKcMapper {
 
     List<Goods> getGoodName(String id);
 
+    void addSkuAndattrAndvalue(@Param("attrVal")ArrayList<MallValue> attrVal,@Param("shp_id")Integer shp_id);
 
-    void addSkuAndattrAndvalue(@Param("attrVal") ArrayList<MallValue> attrVal);
+
 }

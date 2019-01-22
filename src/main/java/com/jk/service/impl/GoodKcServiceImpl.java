@@ -56,7 +56,7 @@ public class GoodKcServiceImpl implements GoodKcService {
             System.out.println("出错了");
         }
 
-        goodKcMapper.addSkuAndattrAndvalue(mallSku.getAttrVal());
+        goodKcMapper.addSkuAndattrAndvalue(mallSku.getAttrVal(),mallSku.getShp_id());
     }
 
     @Override
