@@ -32,11 +32,13 @@
 <body>
 游戏本属性添加页
 <hr/>
-<form action="/goodssx/addGoodssx" method="post">
+<form action="/goodssx/addGoodssx" method="get">
     <!--第一个-->
     <table border="2" id="tableId">
         <tr align="center">
-            <td>属性名:<input name="shxm" id="shxm"><input type="hidden" name="pid" th:value="${queryid}"></td>
+            <td>属性名:<input name="shxm" id="shxm">
+                <!--<input type="hidden" name="pid" th:value="${queryid}">-->
+            </td>
             <td></td>
             <td><a href='javascript:void(0)' onclick="addLine()">添加值</a></td>
         </tr>
