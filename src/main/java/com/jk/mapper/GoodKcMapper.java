@@ -4,7 +4,9 @@ import com.jk.bean.Goods;
 import com.jk.bean.MallAttr;
 import com.jk.bean.MallSku;
 import com.jk.bean.MallValue;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface GoodKcMapper {
@@ -22,5 +24,6 @@ public interface GoodKcMapper {
 
     List<Goods> getGoodName(String id);
 
-    void addSkuAndattrAndvalue(MallSku mallSku);
+
+    void addSkuAndattrAndvalue(@Param("attrVal") ArrayList<MallValue> attrVal);
 }

@@ -22,8 +22,13 @@
         insert into t_mall_sku(shp_id,kc,jg,sku_mch,chjshj) value(#{shp_id},#{kc},#{jg},#{sku_mch},curdate())
     </insert>
 
-    <insert id="addSkuAndattrAndvalue">
-        insert into t_mall_sku_attr_value(shxm_id,shxzh_id,shp_id,curdate(),last_insert_id())
+    <!--void addSkuAndattrAndvalue(@Param("attrVal") ArrayList<MallValue> attrVal);-->
+    <insert id="addSkuAndattrAndvalue" parameterType="java.util.List">
+        insert into t_mall_sku_attr_value(
+        <foreach collection="attrVal" item="att" separator=",">
+            #{att.shxm_id},#{att.shxzh_id},#{att.shp_id},
+        </foreach>
+        curdate(),last_insert_id())
 
     </insert>
 

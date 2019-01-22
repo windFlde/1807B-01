@@ -1,9 +1,6 @@
 package com.jk.service.impl;
 
 
-
-
-
 import com.github.pagehelper.PageHelper;
 import com.jk.bean.*;
 
@@ -58,7 +55,8 @@ public class GoodKcServiceImpl implements GoodKcService {
         } catch (Exception e) {
             System.out.println("出错了");
         }
-        goodKcMapper.addSkuAndattrAndvalue(mallSku);
+
+        goodKcMapper.addSkuAndattrAndvalue(mallSku.getAttrVal());
     }
 
     @Override
