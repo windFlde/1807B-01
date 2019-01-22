@@ -8,7 +8,7 @@
     </select>
 
     <select id="getValue" resultType="mallValue">
-        select id,shxzh from t_mall_value where shxm_id=#{id}
+        select id,shxzh,shxzh_mch from t_mall_value where shxm_id=#{id}
     </select>
 
 
@@ -17,20 +17,17 @@
     <select id="getkucuns" resultType="MallSku">
     SELECT k.*,s.shp_mch shp_mch  FROM t_mall_sku k,t_mall_product s WHERE k.shp_id=s.Id
    </select>
-    
+
     <insert id="addSku">
-        insert into t_mall_sku(shp_id,kc,jg,sku_mch,chjshj) value(#{shp_id},#{kc},#{jg},#{sku_mch},curdate())
+        insert into t_mall_sku(shp_id,kc,jg,sku_mch) value(#{shp_id},#{kc},#{jg},#{sku_mch})
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+    <insert id="addMallSkuAttrValue">
+    insert into t_mall_sku_attr_value(shxm_id,shxzh_id,shp_id,is_sku,sku_id) value(#{shxm_id},#{shxzh_id},#{shp_id},1,#{sku_id})
     </insert>
 
-    <!--void addSkuAndattrAndvalue(@Param("attrVal") ArrayList<MallValue> attrVal);-->
-    <insert id="addSkuAndattrAndvalue" parameterType="java.util.List">
-        insert into t_mall_sku_attr_value(
-        <foreach collection="attrVal" item="att" separator=",">
-            #{att.shxm_id},#{att.shxzh_id},
-        </foreach>
-        #{shp_id},curdate(),last_insert_id())
-
-    </insert>
 
     <select id="getGoodName" resultType="goods">
         select id,shp_mch from t_mall_product where pp_id=#{id}

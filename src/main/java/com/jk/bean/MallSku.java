@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class MallSku {
@@ -27,5 +28,5 @@ public class MallSku {
     private String shxzh_id;
     private String shxm_id;
 
-    private ArrayList<MallSkuValue> attrVal;
+    private List<MallSkuValue> attrVal;
 }

@@ -50,13 +50,14 @@ public class GoodKcServiceImpl implements GoodKcService {
 
     public void addSku(MallSku mallSku) {
         goodKcMapper.addSku(mallSku);
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            System.out.println("出错了");
+        mallSku.setId(mallSku.getId());
+        List<MallSkuValue> list = mallSku.getAttrVal();
+        for (MallSkuValue value : list) {
+            value.setSku_id(mallSku.getId());
+            value.setShp_id(mallSku.getShp_id());
+            goodKcMapper.addMallSkuAttrValue(value);
         }
 
-        goodKcMapper.addSkuAndattrAndvalue(mallSku.getAttrVal(),mallSku.getShp_id());
     }
 
     @Override
