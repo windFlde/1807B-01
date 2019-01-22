@@ -26,9 +26,9 @@
     <insert id="addSkuAndattrAndvalue" parameterType="java.util.List">
         insert into t_mall_sku_attr_value(
         <foreach collection="attrVal" item="att" separator=",">
-            #{att.shxm_id},#{att.shxzh_id},#{att.shp_id},
+            #{att.shxm_id},#{att.shxzh_id},
         </foreach>
-        curdate(),last_insert_id())
+        att.shp_id,curdate(),last_insert_id())
 
     </insert>
 
