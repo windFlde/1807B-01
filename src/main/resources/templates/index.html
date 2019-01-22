@@ -12,59 +12,75 @@
 </head>
 <script type="text/javascript">
     $(function(){
-        $("#tt").tree({
-            onClick: function(node){
-                //console.log(node);
-                var asd = $("#tabs").tabs('exists', node.text);
-                if(asd){
-                    $("#tabs").tabs('select', node.text);
+        getTreeData();
+    })
+    function getTreeData(){
+        $('#tree').tree({
+            data:[{
+                "id": 1,
+                "text": "商品管理",
+                "state": "open",
+                "children": [{
+                    "id": 11,
+                    "text": "商品信息管理",
+                    "url":"mall_massage"
+                },
+                    {
+                        "id": 12,
+                        "text": "商品属性管理",
+                        "url":"mall_shuxing"
+                    },{
+                        "id": 13,
+                        "text": "商品库存管理",
+                        "url":"mall_kucun"
+                    },],
+            }],
+            /* 新建一个面板 */
+            onClick:function(node){
+                if(node.children!=null||node.state=='closed'){return;}
+                if(node.url==null){return;}
+                if($("#center_tabs").tabs('exists',node.text)){
+                    $("#center_tabs").tabs('select',node.text);
                 }else{
-                    $('#tabs').tabs('add',{
+                    $("#center_tabs").tabs('add',{
                         title:node.text,
+                        content:toView(node.url),
                         closable:true,
                         tools:[{
                             iconCls:'icon-mini-refresh',
                             handler:function(){
-                                alert('refresh');
+                                var pp = $("#center_tabs").tabs('getSelected');
+                                var content = pp.panel('options').content;
+                                $("#center_tabs").tabs('update',{
+                                    tab:pp,
+                                    options:content
+                                });
                             }
                         }]
                     });
                 }
             }
         });
-    });
+    }
+    function toView(url){
+        return '<iframe scrolling="auto" frameborder="0"  src="/goods/toView?viewName='+url+ '" style="width:100%;height:100%;"></iframe>';
+    }
 </script>
-<body>
-    <div id="cc" class="easyui-layout" fit="true" >
-        <div data-options="region:'north',title:'North Title',split:true" style="height:150px;">
-            <center><h1>电商管理系统</h1></center>
-        </div>
-        <div data-options="region:'south',title:'South Title',split:true" style="height:100px;"></div>
-        <div data-options="region:'west',title:'West',split:true" style="width:260px;">
-            <ul id="tt" class="easyui-tree">
-                <li>
-                    <span>商品管理</span>
-                    <ul>
-                        <li>
-                            <a href="/goods/toView?viewName=goods-message">商品信息管理</a>
-                        </li>
-                        <li>
-                            <a href="">商品属性管理</a>
-                        </li>
-                        <li>
-                            <a href="/kc/toView?viewName=kucun">商品库存管理</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
-            <div id="tabs" class="easyui-tabs" fit=true >
-                <div title="Tab1" style="padding:20px;display:none;">
-                    欢迎使用
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="easyui-layout" id = "ll">
+<div data-options="region:'north',title:'主标题',iconCls:'icon-ok',split:true" style="height:150px">
+
+</div>
+<div data-options="region:'south',title:'底部',split:true" style="height:100px;">
+
+</div>
+
+<div data-options="region:'west',title:'West',split:true" style="height:500px;width:300px">
+    <ul id="tree">
+    </ul>
+</div>
+
+<div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+    <div fit = true id="center_tabs" class="easyui-tabs" style="width:500px;height:250px;"></div>
+</div>
 </body>
 </html>
