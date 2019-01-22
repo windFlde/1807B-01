@@ -1,9 +1,6 @@
 package com.jk.controller;
 
-import com.jk.bean.MallAttr;
-import com.jk.bean.ReceivePage;
-import com.jk.bean.SendPage;
-import com.jk.bean.ValueBean;
+import com.jk.bean.*;
 import com.jk.service.GoodssxService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +22,6 @@ public class GoodssxController {
         return sp;
     }
 
-//    @ResponseBody
-//    @RequestMapping("getShuValue")
-//    public List<MallAttr> getShuValue(MallAttr m) {
-//
-//        return goodssxService.getShuValue(m);
-//    }
 
     @RequestMapping("batchadd")
     public String batchadd(ValueBean valueBean) {
@@ -38,6 +29,13 @@ public class GoodssxController {
         goodssxService.batchadd(valueBean);
 
         return  "index";
+    }
+    @RequestMapping("addGoodssx")
+    public String addGoodssx(QueryParam queryParam) {
+
+        goodssxService.addGoodssx(queryParam);
+
+        return  "redirect:goods/toview?viewName=mallGoodssx";
     }
 
 }

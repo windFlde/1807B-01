@@ -47,19 +47,18 @@ public class GoodssxServiceImpl implements GoodssxService {
         goodssxMapper.batchadd(valueBean.getValue());
     }
 
-//    @Override
-//    public List<MallAttr> getShuValue(MallAttr m) {
-//        List<MallAttr> list = goodssxMapper.getGoodsSx(m);
-//        System.out.println(list);
-//        for (MallAttr mallAttr : list) {
-//            String mm="";
-//            List<MallValue>   mv=goodssxMapper.getMallValues(mallAttr.getId());
-//                for (MallValue value : mv) {
-//                        mm+=value.getShxzh()+value.getShxzh_mch()+"    ";
-//                }
-//            mallAttr.setShxzh(mm);
-//        }
-//        return list;
-//    }
+    @Override
+    public void addGoodssx(QueryParam queryParam) {
+        goodssxMapper.addGoodssx(queryParam);
+        List<MallAttr> attr_value = queryParam.getAttr_value();
+        for (MallAttr mallAttr : attr_value) {
+            if(mallAttr.getShxzh()!=null){
+                goodssxMapper.addAttr_value(mallAttr,queryParam.getId());
+            }
+        }
+
+
+    }
+
 
 }

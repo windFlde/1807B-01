@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="/js/easyui1.5/themes/icon.css">
+    <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
+    <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+    <script src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/js/layer/layer.js"></script>
+</head>
+<script type="text/javascript">
+    var i = 1;
+    function addLine() {
+        var content = "";
+        content += "<tr>";
+        content += "<td>属性值:<input name='attr_value[" + i + "].shxzh'></td>";
+        content += "<td>单位:<input name='attr_value[" + i + "].shxzh_mch'></td>";
+        content +="	<td><input type='button' onclick='delRow(this)' value='删除'/></td>";
+        content += "</tr>";
+        i++;
+        $("#tableId").append(content);
+    }
+    function delRow(obj){
+        //获取当前对象的父元素，在其下寻找id为“id”的元素的值
+        var id1=$(obj).parents("tr").find("#id").val();
+            //删除界面元素，当前行
+            $(obj).parents("tr").remove();
+    }
+</script>
+<body>
+游戏本属性添加页
+<hr/>
+<form action="/goodssx/addGoodssx" method="post">
+    <!--第一个-->
+    <table border="2" id="tableId">
+        <tr align="center">
+            <td>属性名:<input name="shxm" id="shxm"><input type="hidden" name="pid" th:value="${queryid}"></td>
+            <td></td>
+            <td><a href='javascript:void(0)' onclick="addLine()">添加值</a></td>
+        </tr>
+        <tr align="center">
+            <td>属性值:<input name="attr_value[0].shxzh"></td>
+            <td>单位:<input name="attr_value[0].shxzh_mch">
+            </td>
+            <td><input type="button" onclick="delRow(this)" value="删除"/></td>
+        </tr>
+    </table>
+    <input type="submit">
+</form>
+</body>
+</html>
