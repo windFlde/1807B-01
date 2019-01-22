@@ -20,11 +20,6 @@ public class GoodssxServiceImpl implements GoodssxService {
     public SendPage getGoodsSx(MallAttr m,ReceivePage r) {
 
         List<MallAttr> count = goodssxMapper.getGoodsSx(m);
-        if(r!=null){
-            System.out.println(r.getPage());
-            System.out.println(r.getRows());
-        }
-
         PageHelper.startPage(r.getPage(),r.getRows());
         List<MallAttr> list = goodssxMapper.getGoodsSx(m);
         for (MallAttr mallAttr : list) {

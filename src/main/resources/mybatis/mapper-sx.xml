@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jk.mapper.GoodssxMapper">
 
-    <!--List<MallAttr> getGoodsSx(MallAttr m);-->
-    <select id="getGoodsSx" resultType="MallAttr">
+    <!--List<MallAttr> getGoodsSx(MallAttr mallAttr);-->
+    <select id="getGoodsSx" resultType="mallAttr">
         SELECT  *  FROM  t_mall_attr
             <where>
-                <if test="flbh2!=null and flbh2!=-1">
+                <if test="flbh2 != null">
                     flbh2 =#{flbh2}
                 </if>
             </where>
