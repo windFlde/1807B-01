@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.beans.Transient;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Data
@@ -27,4 +28,5 @@ public class MallSku {
     private String shxzh_id;
     private String shxm_id;
 
+    private ArrayList<MallSkuValue> attrVal;
 }
