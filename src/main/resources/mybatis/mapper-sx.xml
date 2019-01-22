@@ -21,4 +21,12 @@
 
     </select>
 
+    <insert id="batchadd">
+
+        insert into t_mall_value(shxzh,shxzh_mch) values
+        <foreach separator="," item="value" collection="list">(#{value.shxzh},#{value.shxzh_mch}) </foreach>
+
+    </insert>
+
+
 </mapper>
