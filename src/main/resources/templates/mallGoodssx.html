@@ -24,7 +24,6 @@
             pagination:true,
             pageList:[3,4,5,6,7],
             pageSize: 4,
-            flbh2:cc2,
             /* 奇数偶数行不同颜色 start */
             rowStyler: function(index,row){
                 if (index%2==0){
@@ -82,44 +81,32 @@
             method:'get',
             valueField:'id',//<select> <option value='obj.id' > obj.name</select>    $([],functtion(index,obj){})
             textField:'flmch2',  //<select> <option > xxx  </option> </select>
-            onChange:function(newValue, oldValue){//newValue 就是选中的id
+            onChange:function(newValue, oldValue){//newValue 就是选中的idh
                 console.log(newValue);
                 cc2=newValue;
                 console.log("cc2===="+cc2)
-                queryCondition();
-                layer.msg("查询成功");
+                /*ajax start*/
+                $.ajax({
+                    url:"/goodssx/getGoodsSx",
+                    type:"POST",
+                    data:{flbh2:cc2,page:1,rows:4},
+                    success:function(a){
+                        layer.msg("查询成功!");
+                    },
+                    error:function(){
+                        layer.msg("ajax失败");
+                    }
+                });
+                /*ajax end*/
             }
         });
-    }
-    function queryCondition() {
-        //加载数据  直接发送一个对象
-        $('#dg').datagrid('load', serializeFrom2Obj($("#query_form")));
-    }
-
-    //把表单转换为一个对象
-    function serializeFrom2Obj(obj) {
-        var o = {};
-        var a = obj.serializeArray();//[{name:'price',value='12'},{},{}]
-        $.each(a, function () {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
     }
 </script>
 <body>
-<form id="query_form">
-    <select id="cc1" value="-1" class="easyui-combobox" name="id" style="width:200px;">
-    </select> <br />
-    <select id="cc2" value="-1" class="easyui-combobox" name="flbh2" style="width:200px;">
-    </select>
-</form>
+<select id="cc1" value="-1" class="easyui-combobox" name="id" style="width:200px;">
+</select> <br />
+<select id="cc2" value="-1" class="easyui-combobox" name="flbh2" style="width:200px;">
+</select>
 <table id="dg" height="500" width="100%"></table>
 </body>
 </html>
