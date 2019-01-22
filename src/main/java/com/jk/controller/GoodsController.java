@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import ch.qos.logback.core.util.FileUtil;
 import com.jk.bean.Goods;
 import com.jk.bean.MallAttr;
 import com.jk.bean.ReceivePage;
@@ -57,9 +58,9 @@ public class GoodsController {
         return "";
     }
 
-//    @ResponseBody
-//    @RequestMapping("uploadGoods")
-//    public String uploadGoods(HttpServletRequest request, MultipartFile img){
-//        return FileUtil.upload(img, request);
+//   @ResponseBody
+//   @RequestMapping("uploadGoods")
+//   public String uploadGoods(HttpServletRequest request, MultipartFile img){
+//       /*return FileUtil.upload(img, request);*/
 //    }
 }

@@ -12,33 +12,43 @@
 </head>
 <script type="text/javascript" th:inline="none">
     $(function(){
-        $('#table').treegrid({
+        getData();
+    })
+    function getData(){
+        $("#table").datagrid({
             url:'/goods/getQueryGoods',
             striped:true,
             pagination:true,
-            toolbar: '#p',
-            pagePosition:'both',
-            pageList:[1,2,3,4,5,6,7],
-            pageSize:4,
-            rowStyler: function(index){
-                if (index%2!=0){
-                    return 'background-color:#3399cc;color:#fff;';
-                }},
-            columns:[[ {title:'编号',field:'id',width:180},
-                {field: 'shp_mch',title: '商品名字',align: 'center',valign: 'middle'},
-                {field: 'shp_tp',title: '商品图片',align: 'center',valign: 'middle'},
-                {field: 'flbh1',title: '分类编号1',align: 'center',valign: 'middle'},
-                {field: 'flbh2',title: '分类编号2',align: 'center',valign: 'middle'},
-                {field: 'pp_id',title: '品牌id',align: 'center',valign: 'middle'},
-                {field: 'chjshj',title: '创建时间',align: 'center',valign: 'middle'},
-                {field: 'shp_msh',title: '商品描述',align: 'center',valign: 'middle'}, ]]
+            pageList:[3,4,5,6,7],
+            pageSize: 4,
+            /* 奇数偶数行不同颜色 start */
+            rowStyler: function(index,row){
+                if (index%2==0){
+                    return 'background-color:#6293BB;color:#fff;';
+                }else{
+                    return "background-color:#ccfffcc;color:red;";
+                }
+            },
+            /* 奇数偶数行不同颜色 end */
+            columns:[[
+                {field:'xxx',title:'复选框',width:50,checkbox:true},
+                {field:'id',title:'id',width:100},
+                {field: 'shp_mch',title: '商品名字',align: 'center'},
+                {field: 'shp_tp',title: '商品图片',align: 'center',},
+                {field: 'flbh1',title: '分类编号1',align: 'center',},
+                {field: 'flbh2',title: '分类编号2',align: 'center',},
+                {field: 'pp_id',title: '品牌id',align: 'center'},
+                {field: 'chjshj',title: '创建时间',align: 'center'},
+                {field: 'shp_msh',title: '商品描述',align: 'center'},
+            ]],
+            checkOnSelect:false,
         });
-    })
+    }
 </script>
 <body>
     <div id="p">
         <a href="/goods/toView?viewName=goods-add">商品新增</a>
     </div>
-    <table id="table" fit="tree" ></table>
+    <table id="table" height="500" width="100%"></table>
 </body>
 </html>

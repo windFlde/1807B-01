@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface GoodssxMapper {
 
-    List<MallAttr> getGoodsSx(MallAttr m);
+    List<MallAttr> getGoodsSx(MallAttr mallAttr);
 
     List<MallValue> getMallValues(Integer id);
 

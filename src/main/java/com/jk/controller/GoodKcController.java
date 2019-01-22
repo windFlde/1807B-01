@@ -36,9 +36,9 @@ public class GoodKcController {
 
     @ResponseBody
     @RequestMapping("getValue")
-    public List<MallValue> getValue(String id){
+    public List<MallValue> getValue(String ids){
 
-        return goodKcService.getValue(id);
+        return goodKcService.getValue(ids);
     }
 
     //查询

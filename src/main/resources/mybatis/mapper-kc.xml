@@ -28,7 +28,7 @@
         <foreach collection="attrVal" item="att" separator=",">
             #{att.shxm_id},#{att.shxzh_id},
         </foreach>
-        att.shp_id,curdate(),last_insert_id())
+        #{shp_id},curdate(),last_insert_id())
 
     </insert>
 
