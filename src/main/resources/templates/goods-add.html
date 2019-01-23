@@ -103,6 +103,7 @@
         });
     }
     var a = 0;
+    var filename = "";
     function preFile2() {
         //上传插件
         $("#file2").uploadify({
@@ -135,21 +136,19 @@
             },
             //成功回调函数 file：文件对象。data后台输出数据
             'onUploadSuccess': function (file, data, response) {
-                //  for (data)
+                a++;
+                //for (data)
                 //var imgurl =data
                 //alert(data);
                 //给img框赋值进行展示
+                filename += data+"-";
                 $("#testImg2"+a).attr("src", data);
                 //给隐藏的文本框赋值 传到后台
                 $('#hideImg2'+a).val(data); //改!!!!!!!!!!11111
+                $("#tr").append("<input name='shp_tp2' value='"+data+"' id='hideImg2"+a+"' type='hidden'><img id='testImg2"+a+"' src='"+data+"'  width='100'>");
                 $("#tp").show();
             }
         });
-    }
-    function addTP(){
-        a++;
-        $("#tp").hide();
-        $("#tr").append("<input name='shp_tp2' id='hideImg2"+a+"' type='hidden'><img id='testImg2"+a+"' src='photo.png' width='100'>");
     }
 </script>
 <body>
@@ -168,7 +167,6 @@
                     <input id="file" type="file"><br/>
       上传商品图片：<input id="file2" type="file">
                     <div id="fileQueue2"></div><!--文件上传的进度条  -->
-                    <input type="button" id="tp" onclick="addTP()" value="增加图片">
                     <table>
                         <tr id="tr"></tr>
                     </table>
