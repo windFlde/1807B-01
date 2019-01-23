@@ -53,7 +53,7 @@ public class GoodKcServiceImpl implements GoodKcService {
         mallSku.setId(mallSku.getId());
         List<MallSkuValue> list = mallSku.getAttrVal();
         for (MallSkuValue value : list) {
-           if(value.getShxzh_id()!=null){
+           if(value.getShxm_id()!=null){
                value.setSku_id(mallSku.getId());
                value.setShp_id(mallSku.getShp_id());
                goodKcMapper.addMallSkuAttrValue(value);
