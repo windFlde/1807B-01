@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:javascript="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -99,6 +99,12 @@
         });
         return o;
     }
+
+    function toAddGoodssx() {
+            // var cc2=$("#cc2").val();
+            // console.log(cc2);
+            window.location.href="/goodssx/toAddGoodssx?pid="+cc2;
+    }
 </script>
 <body>
 <form id="query_form">
@@ -107,7 +113,7 @@
     <select id="cc2" value="-1" class="easyui-combobox" name="flbh2" style="width:200px;">
     </select>
 </form>
-<a href="/goods/toView?viewName=mallGoodssx">添加物品</a>
+<input type="button" onclick="toAddGoodssx()" value="添加物品">
 <table id="dg" height="500" width="100%"></table>
 </body>
 </html>
