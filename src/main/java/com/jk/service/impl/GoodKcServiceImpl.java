@@ -44,6 +44,7 @@ public class GoodKcServiceImpl implements GoodKcService {
         PageHelper.startPage(receivePage.getPage(),receivePage.getRows());
         List <MallSku> list=goodKcMapper.getkucuns(t); //当前页面数据 其大小取决于 每页多少条
         SendPage sendPage = new SendPage(sum.size(),list);
+        System.out.println("报错了吗？");
         return sendPage;
 
     }
