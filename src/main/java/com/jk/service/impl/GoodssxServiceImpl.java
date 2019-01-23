@@ -45,7 +45,7 @@ public class GoodssxServiceImpl implements GoodssxService {
         List<MallValue> attr_value = queryParam.getAttr_value();
         for (MallValue mallAttr : attr_value) {
             if(mallAttr.getShxzh()!=null){
-                goodssxMapper.addAttr_value(mallAttr,queryParam.getId());
+                goodssxMapper.addAttr_value(mallAttr,queryParam.getPid());
             }
         }
 

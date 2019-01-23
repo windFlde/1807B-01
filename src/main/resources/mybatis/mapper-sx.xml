@@ -41,7 +41,7 @@
     <!--void addAttr_value(MallAttr mallAttr, Integer id);-->
     <insert id="addAttr_value">
     insert into t_mall_value(shxzh,shfqy,shxm_id,shxzh_mch)
-    VALUES (#{mallValue.shxzh},1,#{id},#{mallValue.shxzh_mch})
+    VALUES (#{mallValue.shxzh},1,#{pid},#{mallValue.shxzh_mch})
     </insert>
 
 </mapper>
