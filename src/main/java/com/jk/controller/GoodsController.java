@@ -51,7 +51,7 @@ public class GoodsController {
      * 新增图片
      */
     String filename = "";
-   @ResponseBody
+    @ResponseBody
     @PostMapping("toUploadBlog")
     public String toUploadBlog(@RequestParam("file") MultipartFile file){
         Map<String, Object> stringObjectMap = OssUpFileUtil.uploadFile(file);
