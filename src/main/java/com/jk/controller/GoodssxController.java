@@ -3,6 +3,7 @@ package com.jk.controller;
 import com.jk.bean.*;
 import com.jk.service.GoodssxService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,7 +36,13 @@ public class GoodssxController {
 
         goodssxService.addGoodssx(queryParam);
 
-        return  "redirect:goods/toview?viewName=mallGoodssx";
+        return  "mallGoodssx";
+    }
+
+    @RequestMapping("toAddGoodssx")
+    public String toAddGoodssx(String pid, Model model) {
+        model.addAttribute("pid",pid);
+        return "addGoodssx";
     }
 
 }

@@ -15,7 +15,7 @@ public interface GoodssxMapper {
 
     void batchadd(List<MallValue> value);
 
-    void addGoodssx(@Param("shxm") String shxm);
+    void addGoodssx(@Param("shxm") String shxm, @Param("pid") Integer pid);
 
-//    void addAttr_value(@Param("mallValue") MallValue mallValue, @Param("id")Integer id);
+    void addAttr_value(@Param("mallValue") MallValue mallValue, @Param("id")Integer id);
 }
