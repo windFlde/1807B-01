@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.PingLunMpper">
+
+        <!--List<PingLun> queryPingLun(PingLun p);-->
+        <select id="queryPingLun" resultType="PingLun">
+
+               select tmc.Id,tma.yh_mch,tmc.plnr,tmc.plshj,tmc.hpjb,tms.sku_mch,tmp.shp_mch,tmc.`start` as status from t_mall_product_comment tmc
+                  left join t_mall_user_account tma on tmc.yh_id=tma.Id
+                  left join t_mall_sku tms ON tmc.sku_id=tms.Id
+                  left JOIN t_mall_product tmp on tmc.shp_id=tmp.Id
+        </select>
+
+
+
+    <!--updatePingLun(Integer id);;-->
+    <update id="updatePingLun">
+
+        update t_mall_product_comment set start=2 where Id=#{id}
+
+    </update>
+
+    <!--void updateTongguo(Integer id);-->
+    <update id="updateTongguo">
+
+        update t_mall_product_comment set start=1 where Id=#{id}
+
+    </update>
+
+    <!--void pingLunMpper(Integer id);-->
+    <delete id="pingLunMpper">
+
+        delete from t_mall_product_comment where Id=#{id}
+    </delete>
+
+    <!-- List<Groud> queryTop(Groud g);-->
+    <select id="queryTop" resultType="Groud">
+
+       select * from t_mall_groudurl
+    </select>
+
+    <!--void addGroud(Groud groud);-->
+    <insert id="addGroud">
+
+        insert into t_mall_groudurl(groudName,groudUrl) values(#{groudName},#{groudUrl})
+    </insert>
+
+    <!-- void updateGroud(Groud groud);-->
+    <update id="updateGroud">
+
+        update t_mall_groudurl set
+            groudName=#{groudName},
+            groudUrl=#{groudUrl}
+            where  groudId=#{groudId}
+
+    </update>
+
+    <!-- void deleteGroudByIds(String[] ids);-->
+    <delete id="deleteGroudByIds">
+
+        delete from t_mall_groudurl where groudId in
+        (
+        <foreach collection="array" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+
+    </delete>
+
+    <!--Groud queryTopId(Integer groudId);-->
+   <select id="queryTopId" resultType="Groud">
+
+       select * from t_mall_groudurl where groudId=#{groudId}
+   </select>
+
+
+</mapper>

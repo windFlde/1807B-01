@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="/js/easyui1.5/themes/icon.css">
+    <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
+    <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+    <script src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
+
+    <script type="text/javascript" th:inline="none">
+
+        $(function () {
+
+            initTop();
+        })
+
+
+        function initTop() {
+
+            $('#top').datagrid({
+
+                url:'/pingLun/queryTop',
+                fit:true,
+                toolbar:'#toolbar',
+                pagination:true,
+                pageList:[1,3,5,9],
+                pageSize:3,
+                loadMsg:'正在加载,别着急',
+                columns:[[
+                    {field:'groudId',title:'groudId',checkbox:true},
+                    {field:'groudName',title:'groudName'},
+                    {field:'groudUrl',title:'groudUrl'},
+                    {field:'cz',title:'操作',formatter:function (value,row,index) {
+                        var content="<a href='javascript:void(0)'  onclick=deleteTop("+row.groudId+")>删除</a>";
+                            content+="<a href='javascript:void(0)'  onclick=queryTopId("+row.groudId+")>修改</a>";
+
+                            return content;
+
+                    }}
+
+                ]]
+
+            })
+
+        }
+
+        function openDialog() {
+
+            $('#groudForm').form('reset');
+            $('#groudDialog').dialog({
+                title:'新增groud',
+                iconCls:'icon-add',
+                closed:false
+            })
+        }
+
+        function savaGroud() {
+
+
+            $('#groudForm').form({
+                url:'/pingLun/addGroud',
+                success:function(data){
+                    if (data) {
+                        $('#groudDialog').dialog('close');
+                        location.reload();
+                    }
+                }
+            })
+            $('#groudForm').submit();
+        }
+
+        function deleteTop(id) {
+
+            $.messager.confirm('提示','你确定要删除这条数据吗？',function(r){
+                if(r){
+                    deleteGroudByIds(id);
+                }
+            })
+        }
+
+        function delMany() {
+
+            var arr = $('#top').datagrid('getChecked');
+            if (arr.length <= 0) {
+                $.messager.alert('提示','请选择需要删除的数据','warning')
+                return;
+            }
+            $.messager.confirm('提示','你确定要删除这些数据吗？',function(r){
+                if(r){
+                    var ids = '';
+                    for (var i = 0; i < arr.length; i++) {
+                        ids += ids == '' ? arr[i].groudId : ","+arr[i].groudId;
+                    }
+                    deleteGroudByIds(ids);
+                }
+            })
+        }
+
+
+        function deleteGroudByIds(ids) {
+            $.ajax({
+                url:'/pingLun/deleteGroudByIds',
+                type:'post',
+                data:{"ids":ids},
+                dataType:'json',
+                success:function(data){
+                    if (data) {
+                        location.reload();
+                    }else{
+                        $.messager.alert('提示','删除失败','warning');
+                    }
+                }
+            })
+
+        }
+
+        function queryTopId(groudId) {
+
+           $.ajax({
+
+                url:'/pingLun/queryTopId',
+                type:'post',
+                data:{"groudId":groudId},
+                success:function (data) {
+
+
+                    $('#groudDialog').dialog({
+                        title:'修改Groud',
+                        iconCls:'icon-add',
+                        closed:false
+                    })
+                    $('#groudForm').form('load',data);
+                }
+
+            })
+
+        }
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    <div id="toolbar">
+        <a onclick="openDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+        <a onclick="delMany()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量刪除</a>
+    </div>
+    <div id="groudDialog" class="easyui-dialog" data-options="title:'用户',modal:true,closed:true,
+        buttons:[
+            {
+                text:'保存',
+                iconCls:'icon-save',
+                plain:true,
+                handler:function(){
+                    savaGroud();
+                }
+            }
+        ]" style="width: 300px;height: 300px;">
+        <form id="groudForm" method="post">
+            <table>
+                <tr>
+                    <td>groudName:</td>
+                    <td>
+                        <input type="hidden" name="groudId"/>
+                        <input type="text" class="easyui-textbox" name="groudName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>groudUrl:</td>
+                    <td><input type="text" class="easyui-textbox" name="groudUrl"/> </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <table id="top"></table>
+</body>
+</html>
