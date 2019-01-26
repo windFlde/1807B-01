@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
-@EnableDiscoveryClient
 @SpringBootApplication
+@EnableDiscoveryClient//可以往服务中心进行注册
 @MapperScan("com.jk.mapper")
 public class BootDemoApplication {
 
