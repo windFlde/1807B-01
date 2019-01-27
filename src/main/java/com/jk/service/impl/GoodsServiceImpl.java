@@ -33,6 +33,17 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public void addGoods(Goods goods) {
+
         goodsMapper.addGoods(goods);
+    }
+
+    @Override
+    public List<Goods> daochu(String[] id) {
+        return  goodsMapper.daochu(id);
+    }
+
+    @Override
+    public void daoru(Goods book) {
+        goodsMapper.daoru(book);
     }
 }
