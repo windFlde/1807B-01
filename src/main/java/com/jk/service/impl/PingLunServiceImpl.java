@@ -27,8 +27,8 @@ public class PingLunServiceImpl implements PingLunService {
 
 
     @Override
-    public void updatePingLun(Integer id) {
-        pingLunMpper.updatePingLun(id);
+    public void updatePingLun(PingLun pingLun) {
+        pingLunMpper.updatePingLun(pingLun);
     }
 
     @Override
@@ -72,5 +72,10 @@ public class PingLunServiceImpl implements PingLunService {
     @Override
     public Groud queryTopId(Integer groudId) {
         return pingLunMpper.queryTopId(groudId);
+    }
+
+    @Override
+    public List<PingLun> getAllPingLun(String id) {
+        return pingLunMpper.getAllPingLun(id);
     }
 }

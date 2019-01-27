@@ -23,8 +23,6 @@
         <thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>
     </properties>
 
-
-
     <dependencies>
 
         <!--poi 依赖-->
@@ -38,8 +36,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
-
 
         <!--引入commons-fileupload,文件上传时候用到的jar包 -->
         <dependency>
