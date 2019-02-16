@@ -10,137 +10,132 @@
     <script src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
 
     <script type="text/javascript" th:inline="none">
+        $(function () {
+            initPinglun();
+            $("#dd").hide();
+        })
 
-       $(function(){
-
-
-           initPinglun();
-       })
-
-
-
-
-        function  initPinglun(){
-
-           $('#pinglun').datagrid({
-
-              url:'/pingLun/queryPingLun',
-               pagination:true,
-               pageList:[1,3,5,9],
-               pageSize:3,
-               loadMsg:'正在加载,别着急',
-               columns:[[
-                   {field:'id',title:'Id'},
-                   {field:'yh_mch',title:'用户名称'},
-                   {field:'plnr',title:'评论内容'},
-                   {field:'plshj',title:'评论时间',formatter:function(value,row,index){
-                           var date = new Date(value);
-                           return date.toLocaleDateString();
-                       }},
-                   {field:'hpjb',title:'好评级别'},
-                    {field:'sku_mch',title:'sku名称'},
-                    {field:'shp_mch',title:'商品名称'},
-                   {field:'status',title:'状态',formatter:function (value,row,index) {
-                           return value==0?"未审查":""+value==1?"审查通过":""+value==2?"不通过":"";
-                       }},
-                   {field:'123',title:'操作',formatter:function(value,row,index){
-
-                           if(row.status==0){
-
-                               var  content="<a href='javascript:void(0)'  onclick=editPinglun("+row.id+")>不通过</a>";
-                                content+="<a href='javascript:void(0)'  onclick=delOne("+row.id+")>删除</a>";
-
-                           }else if(row.status==2){
-
-                               var  content="<a href='javascript:void(0)' onclick=edittongguo("+row.id+")>通过</a>";
-                                content+="<a href='javascript:void(0)'  onclick=delOne("+row.id+")>删除</a>";
-                           }else if (row.status==1) {
-                               var  content="<a href='javascript:void(0)'  onclick=delOne("+row.id+")>删除</a>";
-                           }
-
-                           return content;
-                       }}
-               ]]
-           })
+        function initPinglun() {
+            $('#pinglun').datagrid({
+                url: '/pingLun/queryPingLun',
+                pagination: true,
+                pageList: [1, 3, 5, 9],
+                pageSize: 3,
+                toolbar: '#p',
+                loadMsg: '正在加载,别着急',
+                columns: [[
+                    {field: 'xxx', title: 'xxx', checkbox: true},
+                    {field: 'id', title: 'Id'},
+                    {field: 'yh_mch', title: '用户名称'},
+                    {field: 'plnr', title: '评论内容'},
+                    {
+                        field: 'plshj', title: '评论时间', formatter: function (value, row, index) {
+                            var date = new Date(value);
+                            return date.toLocaleDateString();
+                        }
+                    },
+                    {field: 'hpjb', title: '好评级别'},
+                    {field: 'sku_mch', title: 'sku名称'},
+                    {field: 'shp_mch', title: '商品名称'},
+                    {
+                        field: 'status', title: '状态', formatter: function (value, row, index) {
+                            return value == 0 ? "未审查" : "" + value == 1 ? "审查通过" : "" + value == 2 ? "不通过" : "";
+                        }
+                    }, {
+                        field: '123', title: '操作', formatter: function (value, row, index) {
+                            var content= "<a href='javascript:delOne(" + row.id + ")'>删除</a> |";
+                               content += "<a href='javascript:editPinglun(" + row.id + ","+row.status+")'>审核</a>";
+                            return content;
+                        }
+                    }
+                ]]
+            })
+        }
+           function editPinglun(id,start) {
+               $('#itemId').val(id);
+               $('#dd').dialog({
+                   title: '审核弹框',
+                   width: 400,
+                   height: 200,
+                   cache: false,
+                   modal: true,
+                   buttons:[{
+                   text:'保存',
+                       handler:function(){
+                            $.ajax({
+                                   url:"/pingLun/updatePinglun",
+                                   type:"POST",
+                                   data:$("#form").serialize(),
+                                   success:function(pageUtil){
+                                       $("#dd").dialog('close');
+                                       initPinglun();
+                                   },
+                                   error:function(){
+                                       alert("失败了");
+                                   }});
+                   }
+                   },{
+                       text:'关闭',
+                       handler:function(){
+                           $("#dd").dialog('close');
+                       }
+                   }]
+               });
+               $("#w"+start).prop('checked','true');
+               $('#dd').dialog('refresh');
+           }
+        function delOne(id) {
+            $.messager.confirm('提示', '你确定要删除这条数据吗？', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: '/pingLun/deletePingLun',
+                        type: 'post',
+                        data: {"id": id},
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data == 1) {
+                                window.location.reload();
+                            } else {
+                                $.messager.alert('提示', '删除失败', 'warning');
+                            }}})}})}
+        function daoru() {
+            alert("导入")
         }
 
+        function daochu() {
+            alert("导出");
+            var rows = $("#pinglun").datagrid('getChecked');
+            var ids = "";
+            $.each(rows, function (index, obj) {
+                ids += ids == '' ? obj.id : "," + obj.id;
+            });
+            $.ajax({
+                url: "/pingLun/save",
+                type: "POST",
+                data: {id: ids},
+                success: function (pageUtil) {
 
-
-       function editPinglun(id){
-
-           $.ajax({
-               url:"/pingLun/updatePinglun",
-               type:"POST",
-               data:{"id":id},
-               success:function(data){
-
-                   if(data == 1){
-
-                      alert("操作成功");
-                       location.reload();
-                   }else{
-
-                       alert("操作失败");
-                   }
-
-               },
-               error:function(){
-                   alert("ajax访问失败了,查看控制台");
-               }
-           });
-
-       }
-
-       function edittongguo(id){
-
-           $.ajax({
-               url:"/pingLun/updateTongguo",
-               type:"POST",
-               data:{"id":id},
-               success:function(data){
-
-                   if(data == 1){
-
-                       alert("操作成功");
-                       location.reload();
-                   }else{
-
-                       alert("操作失败");
-                   }
-
-               },
-               error:function(){
-                   alert("ajax访问失败了,查看控制台");
-               }
-           });
-       }
-
-       function delOne(id){
-           $.messager.confirm('提示','你确定要删除这条数据吗？',function(r){
-               if(r){
-                   $.ajax({
-                       url:'/pingLun/deletePingLun',
-                       type:'post',
-                       data:{"id":id},
-                       dataType:'json',
-                       success:function(data){
-                           if (data==1) {
-                               window.location.reload();
-                           }else{
-                               $.messager.alert('提示','删除失败','warning');
-                           }
-                       }
-                   })
-               }
-           })
-       }
-
-
-
-
+                },
+                error: function () {
+                    alert("失败了");
+                }
+            });
+        }
     </script>
 </head>
 <body>
-    <table id="pinglun"></table>
+<div id="p">
+    <a id="btn" href="javascript:daoru()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">poi导入</a>
+    <a id="btn" href="javascript:daochu()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">poi导出</a>
+</div>
+<table id="pinglun"></table>
+<div id="dd">
+    <form id="form">
+        <input type="hidden" id="itemId" name="id" value="">
+        <input type="radio" id="w0" name="status" value="0">待审核
+        <input type="radio" id="w1" name="status" value="1">审核通过
+        <input type="radio" id="w2" name="status" value="2">审核不通过
+    </form>
+</div>
 </body>
 </html>

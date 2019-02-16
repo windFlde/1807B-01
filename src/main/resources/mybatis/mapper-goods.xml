@@ -24,5 +24,22 @@
     </insert>
 
 
+  <!--  List<Goods> daochu(String[] id);  poi导出excel文件测试查询-->
+    <select id="daochu" resultType="com.jk.bean.Goods">
+  select * from t_mall_product where Id in
+  <foreach collection="array" item="id" open="(" close=")" index="index" separator=",">
+      #{id}
+  </foreach>
+    </select>
+
+   <!-- void daoru(Goods book);-->
+    <insert id="daoru" >
+        insert into
+        t_mall_product
+          (Id,shp_mch,shp_tp,flbh1,flbh2,pp_id,chjshj,shp_msh)
+        values
+          (null,#{shp_mch},#{shp_tp},#{flbh1},#{flbh2},#{pp_id},#{chjshj},#{shp_msh})
+    </insert>
+
 
 </mapper>

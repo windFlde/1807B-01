@@ -2,21 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jk.mapper.PingLunMpper">
 
-        <!--List<PingLun> queryPingLun(PingLun p);-->
-        <select id="queryPingLun" resultType="PingLun">
-
+    <!--List<PingLun> queryPingLun(PingLun p);-->
+    <select id="queryPingLun" resultType="PingLun">
                select tmc.Id,tma.yh_mch,tmc.plnr,tmc.plshj,tmc.hpjb,tms.sku_mch,tmp.shp_mch,tmc.`start` as status from t_mall_product_comment tmc
                   left join t_mall_user_account tma on tmc.yh_id=tma.Id
                   left join t_mall_sku tms ON tmc.sku_id=tms.Id
                   left JOIN t_mall_product tmp on tmc.shp_id=tmp.Id
         </select>
 
-
-
-    <!--updatePingLun(Integer id);;-->
+    <!--updatePingLun(PingLun pingLun);;-->
     <update id="updatePingLun">
 
-        update t_mall_product_comment set start=2 where Id=#{id}
+        update t_mall_product_comment set start=#{status} where Id=#{id}
 
     </update>
 
@@ -68,10 +65,15 @@
     </delete>
 
     <!--Groud queryTopId(Integer groudId);-->
-   <select id="queryTopId" resultType="Groud">
-
+    <select id="queryTopId" resultType="Groud">
        select * from t_mall_groudurl where groudId=#{groudId}
    </select>
 
-
+    <!--List<PingLun> getAllPingLun(String[] id);-->
+    <select id="getAllPingLun" resultType="Pinglun">
+      select tmc.Id,tma.yh_mch,tmc.plnr,tmc.plshj,tmc.hpjb,tms.sku_mch,tmp.shp_mch,tmc.`start` as status from t_mall_product_comment tmc
+                  left join t_mall_user_account tma on tmc.yh_id=tma.Id
+                  left join t_mall_sku tms ON tmc.sku_id=tms.Id
+                  left JOIN t_mall_product tmp on tmc.shp_id=tmp.Id in (${id})
+</select>
 </mapper>

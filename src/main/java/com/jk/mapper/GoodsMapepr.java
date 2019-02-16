@@ -14,4 +14,8 @@ public interface GoodsMapepr {
     List<MallAttr> getQueryGoods(MallAttr m);
 
     void addGoods(Goods goods);
+
+    List<Goods> daochu(String[] id);
+
+    void daoru(Goods book);
 }

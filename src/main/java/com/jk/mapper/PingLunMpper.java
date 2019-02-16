@@ -2,6 +2,7 @@ package com.jk.mapper;
 
 import com.jk.bean.Groud;
 import com.jk.bean.PingLun;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface PingLunMpper {
     List<PingLun> queryPingLun(PingLun p);
 
 
-    void updatePingLun(Integer id);
+    void updatePingLun(PingLun pingLun);
 
     void updateTongguo(Integer id);
 
@@ -26,4 +27,6 @@ public interface PingLunMpper {
     void deleteGroudByIds(String[] ids);
 
     Groud queryTopId(Integer groudId);
+
+    List<PingLun> getAllPingLun(@Param("id") String id);
 }
