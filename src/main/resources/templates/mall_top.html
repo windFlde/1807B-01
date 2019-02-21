@@ -35,7 +35,7 @@
                     {field:'groudUrl',title:'groudUrl'},
                     {field:'cz',title:'操作',formatter:function (value,row,index) {
                         var content="<a href='javascript:void(0)'  onclick=deleteTop("+row.groudId+")>删除</a>";
-                            content+="<a href='javascript:void(0)'  onclick=queryTopId("+row.groudId+")>修改</a>";
+                            content+=" | <a href='javascript:void(0)'  onclick=queryTopId("+row.groudId+")>修改</a>";
 
                             return content;
 

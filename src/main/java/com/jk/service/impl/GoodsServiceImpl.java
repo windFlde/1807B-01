@@ -7,7 +7,6 @@ import com.jk.bean.ReceivePage;
 import com.jk.bean.SendPage;
 import com.jk.mapper.GoodsMapepr;
 import com.jk.service.GoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,6 +34,12 @@ public class GoodsServiceImpl implements GoodsService{
     public void addGoods(Goods goods) {
 
         goodsMapper.addGoods(goods);
+    }
+
+    @Override
+    public List<MallAttr> getGoods() {
+        MallAttr m = new MallAttr();
+        return goodsMapper.getQueryGoods(m);
     }
 
     @Override
