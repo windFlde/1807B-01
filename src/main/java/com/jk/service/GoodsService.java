@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface GoodsService {
 
 
@@ -18,4 +20,6 @@ public interface GoodsService {
     List<Goods> daochu(@Param("id") String[] id);
 
     void daoru(Goods book);
+
+    List<MallAttr> getGoods();
 }
