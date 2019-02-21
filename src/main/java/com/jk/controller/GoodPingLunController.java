@@ -1,9 +1,6 @@
 package com.jk.controller;
 
-import com.jk.bean.Groud;
-import com.jk.bean.PingLun;
-import com.jk.bean.ReceivePage;
-import com.jk.bean.SendPage;
+import com.jk.bean.*;
 import com.jk.service.PingLunService;
 import com.jk.utils.ExportExcel;
 import org.springframework.stereotype.Controller;
@@ -33,6 +30,14 @@ public class GoodPingLunController {
 
     }
 
+    @RequestMapping("queryGoods")
+    @ResponseBody
+    public List<Goods> queryGoods(Integer pp_id) {
+
+        List<Goods> goods = pingLunService.queryGoods(pp_id);
+        return  goods;
+    }
+
 
     @RequestMapping("updatePinglun")
     @ResponseBody
@@ -42,13 +47,6 @@ public class GoodPingLunController {
         return "1";
     }
 
-    @RequestMapping("updateTongguo")
-    @ResponseBody
-    public String updateTongguo(Integer id) {
-
-        pingLunService.updateTongguo(id);
-        return "1";
-    }
 
 
     @RequestMapping("deletePingLun")
@@ -130,4 +128,6 @@ public class GoodPingLunController {
         ExportExcel.exportExcel(sheetName, titleName, headers, dataSet, resultUrl, pattern);
         return "success";
     }
+
+
 }

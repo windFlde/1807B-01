@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="/js/easyui1.5/themes/icon.css">
+    <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
+    <link rel="stylesheet" href="/js/uploadify/uploadify.css" />
+    <script src="/js/uploadify/jquery.uploadify.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#class1').combobox({
+                url:'/json/class_1.js',
+                valueField:'id',
+                textField:'flmch1',
+                method:'get',
+                onSelect: function(rec){
+                    console.log(rec);
+                    $('#class2').combobox({
+                        url:'/json/class_2_'+rec.id+'.js',
+                        valueField:'id',
+                        textField:'flmch2',
+                        method:'get',
+                        onSelect: function(rec){
+                            console.log(rec);
+                            $('#class3').combobox({
+                                url:'/json/tm_class_1_'+rec.flbh1+'.js',
+                                valueField:'id',
+                                textField:'ppmch',
+                                method:'get',
+                                onSelect:function(rec){
+                                    console.log(rec);
+                                    $('#class4').combobox({
+                                        url:'/pingLun/queryGoods?pp_id='+rec.id,
+                                        valueField:'id',
+                                        textField:'shp_mch',
+                                        method:'get'
+                                    })
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        })
+
+
+    </script>
+</head>
+<body>
+    <form id="add">
+
+    <input id="class1" name="dept" value="请选择">
+    <input id="class2" name="dept" value="请选择">
+    <input id="class3" name="dept" value="请选择">
+    <input id="class4" name="id" value="请选择"/>
+    <hr>
+    <hr>
+    商品库存名称：<input type="text" name="sku_mch"><br>
+    商品库存数量：<input type="text" name="kc"><br>
+    商品库存价格：<input type="text" name="jg"><br>
+    </form>
+</body>
+</html>

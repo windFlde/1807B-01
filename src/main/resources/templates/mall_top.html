@@ -139,18 +139,14 @@
 
         }
 
-
-
-
-
-
-
     </script>
 </head>
 <body>
     <div id="toolbar">
         <a onclick="openDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
         <a onclick="delMany()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量刪除</a>
+        <a  href="JavaScript:importq()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'导入'"></a>
+        <a  href="JavaScript:exportq()" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true,text:'批量导出'"></a>
     </div>
     <div id="groudDialog" class="easyui-dialog" data-options="title:'用户',modal:true,closed:true,
         buttons:[

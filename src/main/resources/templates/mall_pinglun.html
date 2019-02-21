@@ -67,8 +67,10 @@
                                    type:"POST",
                                    data:$("#form").serialize(),
                                    success:function(pageUtil){
-                                       $("#dd").dialog('close');
-                                       initPinglun();
+
+                                           $("#dd").dialog('close');
+                                           initPinglun();
+
                                    },
                                    error:function(){
                                        alert("失败了");
@@ -85,8 +87,7 @@
                $('#dd').dialog('refresh');
            }
         function delOne(id) {
-            $.messager.confirm('提示', '你确定要删除这条数据吗？', function (r) {
-                if (r) {
+
                     $.ajax({
                         url: '/pingLun/deletePingLun',
                         type: 'post',
@@ -97,7 +98,11 @@
                                 window.location.reload();
                             } else {
                                 $.messager.alert('提示', '删除失败', 'warning');
-                            }}})}})}
+                            }
+                        }
+                    })
+
+        }
         function daoru() {
             alert("导入")
         }

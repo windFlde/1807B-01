@@ -13,7 +13,6 @@ public interface PingLunService {
 
     void updatePingLun(PingLun pingLun);
 
-    void updateTongguo(Integer id);
 
     void deletePingLun(Integer id);
 
@@ -29,4 +28,8 @@ public interface PingLunService {
 
 
     List<PingLun> getAllPingLun(String id);
+
+    List<Goods> queryGoods(Integer pp_id);
+
+
 }

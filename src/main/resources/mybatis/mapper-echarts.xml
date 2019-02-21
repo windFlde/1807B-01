@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.EchartsMapper">
+
+    <!-- List<Echarts> queryEcharts();-->
+    <select id="queryEcharts" resultType="Echarts">
+
+        select count(id) as value,DATE_FORMAT(createtime,"%Y-%m") as name from t_user where createtime between '2018-06-01' and '2018-12-31'
+        group by DATE_FORMAT(createtime,"%Y-%m");
+    </select>
+
+    <!-- List<Echarts> queryEcharts2();-->
+    <select id="queryEcharts2" resultType="Echarts">
+
+       select number as value,username as name  from t_user
+    </select>
+
+
+
+
+</mapper>

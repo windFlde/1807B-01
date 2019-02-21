@@ -15,6 +15,7 @@
       <module name="clob-center" target="1.8" />
       <module name="cloub-center" target="1.5" />
       <module name="cloun-center" target="1.8" />
+      <module name="demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

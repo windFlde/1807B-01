@@ -31,10 +31,7 @@ public class PingLunServiceImpl implements PingLunService {
         pingLunMpper.updatePingLun(pingLun);
     }
 
-    @Override
-    public void updateTongguo(Integer id) {
-        pingLunMpper.updateTongguo(id);
-    }
+
 
     @Override
     public void deletePingLun(Integer id) {
@@ -77,5 +74,10 @@ public class PingLunServiceImpl implements PingLunService {
     @Override
     public List<PingLun> getAllPingLun(String id) {
         return pingLunMpper.getAllPingLun(id);
+    }
+
+    @Override
+    public List<Goods> queryGoods(Integer pp_id) {
+        return pingLunMpper.queryGoods(pp_id);
     }
 }
