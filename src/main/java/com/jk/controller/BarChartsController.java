@@ -24,12 +24,11 @@ public class BarChartsController {
     public BarBean getChart(){
         BarBean barBean = new BarBean();
         //标题
-        barBean.setText("下半年用户注册情况");
+        barBean.setText("全年用户注册情况");
         barBean.setSubtext("数据纯属虚构");
 
         //总数据
         List<ListData> list = barChartsService.getEchart();
-
 
         List<String> arrayList = new ArrayList<>();
         List<String> arrayList2 = new ArrayList<>();
