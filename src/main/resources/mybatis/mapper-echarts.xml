@@ -15,6 +15,22 @@
        select number as value,username as name  from t_user
     </select>
 
+    <!--void importq(Groud groud);-->
+    <insert id="importq">
+
+        insert into t_mall_groudurl(groudId,groudName,groudUrl) values(null,#{groudName},#{groudUrl})
+
+    </insert>
+
+    <!-- List<Groud> exportq(String[] groudId);-->
+    <select id="exportq" resultType="Groud">
+
+        select * from t_mall_groudurl id in
+        <foreach collection="array" item="id" open="(" close=")" index="index" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
 
 
 

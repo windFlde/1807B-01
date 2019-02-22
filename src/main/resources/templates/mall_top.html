@@ -47,6 +47,8 @@
 
         }
 
+
+
         function openDialog() {
 
             $('#groudForm').form('reset');
@@ -138,6 +140,67 @@
             })
 
         }
+
+        function importq() {
+
+             $.ajax({
+                     url:'/ech/importq',
+                     type:'post',
+                     success:function (data) {
+
+                         if (date==1) {
+
+                             $.messager.alert('提示','导入成功');
+                         }
+                         initTop();
+
+
+                     },error:function () {
+                         alert("导入失败");
+                     }
+
+                     })
+        }
+
+        //poi导出
+        function exportq(){
+            var arrTop = $('#top').datagrid('getChecked');
+            if (arrTop.length <= 0) {
+                $.messager.alert("提示","请选择要导出的数据!");
+                return;
+            }else{
+                var ids = [];
+                for ( var i in arrTop) {
+                    // 将选中的每行数据遍历获取id放入数组当中
+                    ids.push(arrTop[i].groudId);
+                }
+
+
+                     $.messager.confirm('提示', '你确定导出' + arrTop.length + '条记录吗?', function (r) {
+                        if (r) {
+
+
+                            $.ajax({
+                                url: '/ech/exportq',
+                                type: 'post',
+                                data: {id: ids},
+                                success: function () {
+                                    $.messager.alert('提示', '导出成功');
+                                    initTop();
+                                },
+                                error: function () {
+                                    alert("导出失败");
+                                }
+                            })
+                        }
+                    })
+
+            }
+
+        }
+
+
+
 
     </script>
 </head>

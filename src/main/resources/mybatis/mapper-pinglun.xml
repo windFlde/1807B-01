@@ -41,6 +41,8 @@
         insert into t_mall_groudurl(groudName,groudUrl) values(#{groudName},#{groudUrl})
     </insert>
 
+
+
     <!-- void updateGroud(Groud groud);-->
     <update id="updateGroud">
 
