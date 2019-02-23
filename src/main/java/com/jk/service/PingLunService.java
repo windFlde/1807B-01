@@ -27,9 +27,10 @@ public interface PingLunService {
     Groud queryTopId(Integer groudId);
 
 
-    List<PingLun> getAllPingLun(String id);
+   /* List<PingLun> getAllPingLun(String id);*/
 
     List<Goods> queryGoods(Integer pp_id);
 
 
+    List<PingLun> getAllPingLun(String[] id);
 }

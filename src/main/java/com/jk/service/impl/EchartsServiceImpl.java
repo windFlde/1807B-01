@@ -31,8 +31,7 @@ public class EchartsServiceImpl implements EchartsService {
     }
 
     @Override
-    public List<Groud> exportq(String[] id) {
-
+    public List<Groud> exportq(String id) {
         return echartsMapper.exportq(id);
     }
 

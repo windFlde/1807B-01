@@ -14,6 +14,5 @@ public interface EchartsService {
 
     void importq(Groud groud);
 
-
-    List<Groud> exportq(String [] id);
+    List<Groud> exportq(String id);
 }

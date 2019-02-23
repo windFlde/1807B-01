@@ -4,21 +4,20 @@ import com.jk.bean.Echarts;
 import com.jk.bean.Groud;
 import com.jk.service.EchartsService;
 import com.jk.utils.ExportExcel;
-import com.jk.utils.importExcel;
+import com.jk.utils.FileUtil;
+import com.jk.utils.PortExcel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping("/ech")
+@RequestMapping("ech")
 public class EchartsController {
 
     @Autowired
@@ -72,7 +71,7 @@ public class EchartsController {
     }*/
 
 
-    @RequestMapping("importq")
+    /*@RequestMapping("importq")
     @ResponseBody
     public String importq() throws IOException {
 
@@ -96,30 +95,53 @@ public class EchartsController {
 
         return "1";
 
+    }*/
+
+    //poi导入
+    @ResponseBody
+    @RequestMapping("importExcel")
+    public String importExcel(MultipartFile file) throws Exception{
+        String filePath = file.getOriginalFilename();
+        // System.out.println(filePath);
+        String path = filePath.substring(filePath.lastIndexOf("."));
+        if (path.equals(".xls")) {
+            int startRow = 2;//从表格的哪一行开始读取
+            int endRow = 0;
+            List<Groud> groudList = (List<Groud>) PortExcel.importExcel(file.getInputStream(),startRow,endRow,Groud.class);
+            for (Groud groud : groudList) {
+                groud.setGroudId(null);
+                echartsService.importq(groud);
+            }
+            return "1";//成功
+        } else {
+            return "0";
+        }
     }
 
-    @RequestMapping("exportq")
+
+   @RequestMapping("exportq")
     @ResponseBody
-    public String exportq(@RequestParam("id[]") String [] id) {
+    public ResponseEntity<byte[]> save(String id) throws Exception {
 
         String sheetName="Top列表";
         String titleName="我的列表";
         String[] headers = { "TopID", "Top名称", "Top地址"};
-
-        /////获取桌面路径
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        File file = fsv.getHomeDirectory();
-        //格式化时间戳
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HHmmss");
-        String s = simpleDateFormat.format(new Date());
-
-        //去数据库查询要导出的数据
         List<Groud> list=echartsService.exportq(id);
-        String resultUrl = file.getPath() + "//" + s + ".xls";
-        String pattern = "yyyy-MM-dd";
-        ExportExcel.exportExcel(sheetName,titleName,headers,list,resultUrl,pattern);
 
-        return  "success";
+       String replace = UUID.randomUUID().toString().replace("-", "");
+
+       String fileDir = "D:\\poi\\";
+
+       File file = new File(fileDir);
+       if (!file.exists()) {
+           file.mkdirs();
+       }
+       String randomPath = fileDir + replace+".xls";
+
+        String pattern = "yyyy-MM-dd";
+        ExportExcel.exportExcel(sheetName,titleName,headers,list,randomPath,pattern);
+
+        return FileUtil.FileDownload(randomPath,"fileName.xls");
     }
 
 

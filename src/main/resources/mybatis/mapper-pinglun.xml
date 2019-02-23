@@ -54,7 +54,7 @@
     </update>
 
     <!-- void deleteGroudByIds(String[] ids);-->
-    <delete id="deleteGroudByIds">
+    <delete id="deleteGroudByIds" parameterType="string">
 
         delete from t_mall_groudurl where groudId in
         (
@@ -75,6 +75,11 @@
       select tmc.Id,tma.yh_mch,tmc.plnr,tmc.plshj,tmc.hpjb,tms.sku_mch,tmp.shp_mch,tmc.`start` as status from t_mall_product_comment tmc
                   left join t_mall_user_account tma on tmc.yh_id=tma.Id
                   left join t_mall_sku tms ON tmc.sku_id=tms.Id
-                  left JOIN t_mall_product tmp on tmc.shp_id=tmp.Id in (${id})
+                  left JOIN t_mall_product tmp on tmc.shp_id=tmp.Id /*in (${id})*/
+                  where id in
+        <foreach collection="array" item="item" open="(" close=")" index="index" separator=",">
+            #{item}
+        </foreach>
+
 </select>
 </mapper>

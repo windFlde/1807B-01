@@ -109,7 +109,7 @@ public class GoodPingLunController {
     //poi导出
     @ResponseBody
     @RequestMapping("save")
-    public String save(@RequestParam("id") String id) throws Exception {
+    public String save(@RequestParam("id[]") String[] id) throws Exception {
         String sheetName = "评论列表";
         String titleName = "内容";
         String[] headers = {"评论ID", "用户名称", "评论内容", "评论时间", "好评级别", "sku名称", "商品名称", "状态"};

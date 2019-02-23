@@ -15,6 +15,8 @@
         $(function () {
 
             initTop();
+            $("#dialogPoi").dialog('close');
+            $("#exportExcelId").dialog('close');
         })
 
 
@@ -99,6 +101,8 @@
                     deleteGroudByIds(ids);
                 }
             })
+
+
         }
 
 
@@ -106,7 +110,7 @@
             $.ajax({
                 url:'/pingLun/deleteGroudByIds',
                 type:'post',
-                data:{"ids":ids},
+                data:{ids:ids},
                 dataType:'json',
                 success:function(data){
                     if (data) {
@@ -141,64 +145,68 @@
 
         }
 
+        //打开导入弹框
         function importq() {
 
-             $.ajax({
-                     url:'/ech/importq',
-                     type:'post',
-                     success:function (data) {
-
-                         if (date==1) {
-
-                             $.messager.alert('提示','导入成功');
-                         }
-                         initTop();
+            $("#dialogPoi").dialog('open')
+        }
 
 
-                     },error:function () {
-                         alert("导入失败");
-                     }
 
-                     })
+        function toImport() {
+
+            var formData = new FormData($("#form_poi")[0]);
+
+            $.ajax({
+                url: '/ech/importExcel',
+                type: 'post',
+                data:formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+
+                    if (result == 1) {
+
+                        $.messager.alert('提示', '导入成功');
+                        $("#dialogPoi").dialog('close');
+                    }else if (result == 0) {
+                        $.messager.alert('提示', '格式错误');
+                        $("#dialogPoi").dialog('close')//关闭poi对话框
+                    }
+                    initTop();
+
+
+                }, error: function () {
+                    alert("导入失败");
+                }
+
+            });
+
         }
 
         //poi导出
-        function exportq(){
+       function exportq(){
             var arrTop = $('#top').datagrid('getChecked');
             if (arrTop.length <= 0) {
                 $.messager.alert("提示","请选择要导出的数据!");
                 return;
             }else{
-                var ids = [];
+                var ids = "";
                 for ( var i in arrTop) {
-                    // 将选中的每行数据遍历获取id放入数组当中
-                    ids.push(arrTop[i].groudId);
+
+                    ids+=","+arrTop[i].groudId;
                 }
+                ids = ids.substr(1);
 
 
-                     $.messager.confirm('提示', '你确定导出' + arrTop.length + '条记录吗?', function (r) {
-                        if (r) {
-
-
-                            $.ajax({
-                                url: '/ech/exportq',
-                                type: 'post',
-                                data: {id: ids},
-                                success: function () {
-                                    $.messager.alert('提示', '导出成功');
-                                    initTop();
-                                },
-                                error: function () {
-                                    alert("导出失败");
-                                }
-                            })
-                        }
-                    })
+                $.messager.confirm('提示','你确定导出'+arrTop.length+'条记录吗?',function(r){
+                    location.href="/ech/exportq?id="+ids
+                });
 
             }
 
         }
-
 
 
 
@@ -238,6 +246,60 @@
             </table>
         </form>
     </div>
+
+    <!-- 对话框窗口 导入 开始-->
+    <div id="dialogPoi"  class="easyui-dialog" title="My Dialog" style="width:400px;height:200px;"
+         data-options="iconCls:'icon-save',resizable:true,modal:true,
+			buttons:[{
+				text:'保存',
+				iconCls:'icon-ok',
+				handler:function(){
+					toImport();//调用另一个方法
+				}
+			},{
+				text:'取消',
+				iconCls:'icon-clear',
+				handler:function(){
+					clearFormData();//新增之后 清除表单数据
+					$('#dialog').dialog('close'); //关闭对话框
+				}
+			}]">
+        <form id="form_poi">
+            <!--poi导入 载体-->
+            选择需要导入的文件: <input name="file" class="easyui-filebox" style="width:300px" buttonText="选择文件"><br>
+            <!-- 导入文件模板:<a href="javascript:void(0)" class="easyui-linkbutton" onClick="openStyleDialog()"
+                       data-options="iconCls:'icon-tip'">点击查看</a>-->
+        </form>
+    </div>
+    <!-- 对话框窗口 导入  结束-->
+
+    <!--导出-->
+    <div id="exportExcelId"  class="easyui-dialog" title="My Dialog" style="width:400px;height:200px;"
+         data-options="iconCls:'icon-save',resizable:true,modal:true,
+			buttons:[{
+				text:'保存',
+				iconCls:'icon-ok',
+				handler:function(){
+					exportq();//调用另一个方法
+				}
+			},{
+				text:'取消',
+				iconCls:'icon-clear',
+				handler:function(){
+					clearFormData();//新增之后 清除表单数据
+					$('#dialog').dialog('close'); //关闭对话框
+				}
+			}]">
+        <form id="expectId">
+            <!--poi导入 载体-->
+            选择需要导出的地址: <input name="fileName" class="easyui-filebox" style="width:300px" buttonText="请选择地址"><br>
+            <!-- 导入文件模板:<a href="javascript:void(0)" class="easyui-linkbutton" onClick="openStyleDialog()"
+                       data-options="iconCls:'icon-tip'">点击查看</a>-->
+        </form>
+    </div>
+    <!--导入-->
+
     <table id="top"></table>
+
 </body>
 </html>

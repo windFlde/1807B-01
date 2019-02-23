@@ -71,13 +71,18 @@ public class PingLunServiceImpl implements PingLunService {
         return pingLunMpper.queryTopId(groudId);
     }
 
-    @Override
+   /* @Override
     public List<PingLun> getAllPingLun(String id) {
         return pingLunMpper.getAllPingLun(id);
-    }
+    }*/
 
     @Override
     public List<Goods> queryGoods(Integer pp_id) {
         return pingLunMpper.queryGoods(pp_id);
+    }
+
+    @Override
+    public List<PingLun> getAllPingLun(String[] id) {
+        return pingLunMpper.getAllPingLun(id);
     }
 }

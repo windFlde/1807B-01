@@ -22,13 +22,11 @@
 
     </insert>
 
-    <!-- List<Groud> exportq(String[] groudId);-->
+    <!-- List<Groud> exportq(String id);-->
     <select id="exportq" resultType="Groud">
 
-        select * from t_mall_groudurl id in
-        <foreach collection="array" item="id" open="(" close=")" index="index" separator=",">
-            #{id}
-        </foreach>
+        select * from t_mall_groudurl where groudId in (${_parameter})
+
     </select>
 
 

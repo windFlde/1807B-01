@@ -31,4 +31,6 @@ public interface PingLunMpper {
     List<PingLun> getAllPingLun(@Param("id") String id);
 
     List<Goods> queryGoods(Integer pp_id);
+
+    List<PingLun> getAllPingLun(String[] id);
 }
