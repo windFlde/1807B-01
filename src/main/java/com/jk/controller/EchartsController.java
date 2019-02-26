@@ -47,7 +47,7 @@ public class EchartsController {
 
     }
 
-    /*@RequestMapping("queryEcharts2")
+    @RequestMapping("queryEcharts2")
     @ResponseBody
     public  Map<String, Object> queryEcharts2() {
 
@@ -68,7 +68,7 @@ public class EchartsController {
 
         return params;
 
-    }*/
+    }
 
 
     /*@RequestMapping("importq")
