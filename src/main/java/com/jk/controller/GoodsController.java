@@ -6,16 +6,23 @@ import com.jk.bean.ReceivePage;
 import com.jk.bean.SendPage;
 import com.jk.service.GoodsService;
 import com.jk.utils.ExportExcel;
+import com.jk.utils.FileUtil;
 import com.jk.utils.OssUpFileUtil;
 import com.jk.utils.importExcel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -85,15 +92,25 @@ public class GoodsController {
     //poi导出 throws Exception
     @ResponseBody
     @RequestMapping("daochu")
-    public String daochu(@RequestParam("id[]") String[] id){
+    public ResponseEntity<byte[]> daochu(@RequestParam("id[]") String[] id){
         String sheetName="商品列表";
         String titleName="我的列表";
         String[] headers = { "商品ID", "商品名称", "商品图片", "分类编号1" ,"分类编号2","品牌id","创建时间","商品描述"};
         List<Goods> dataSet = goodsService.daochu(id);
-        String resultUrl="D:\\googds.xls";
-        String pattern="yyyy-MM-dd";
-        ExportExcel.exportExcel(sheetName, titleName, headers, dataSet, resultUrl, pattern);
-        return "success";
+        String replace = UUID.randomUUID().toString().replace("-", "");
+
+        String fileDir = "E:\\poi\\";
+
+        File file = new File(fileDir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String randomPath = fileDir + replace+".xls";
+
+        String pattern = "yyyy-MM-dd";
+        ExportExcel.exportExcel(sheetName, titleName, headers, dataSet, randomPath, pattern);
+
+        return FileUtil.FileDownload(randomPath,"fileName.xls");
     }
     //poi导入
     @ResponseBody
